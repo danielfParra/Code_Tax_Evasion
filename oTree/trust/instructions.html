@@ -1,0 +1,32 @@
+{{ block title }}Instructions{{ endblock }}
+{{ block content }}
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+    <h3>
+        Decoding Task
+    </h3>
+    <p>
+       You will perform a encoding task. Specifically, you will be given sequences of
+       three random capital letters. We call the three letters combination a `word' for simplicity.
+       You have to allocate a number to each capital letter. The encoding code can be found in
+       a table below the corresponding letter. For each word, the decoding table changes.
+       For illustration, consider the following screenshot:
+    </p>
+
+    <div class="card" style="width: 18rem;">
+    <img src="{{ static decoding-screen.PNG}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+
+</div>
+</div>
+
+
+    {{ next_button }}
+
+{{ endblock }}

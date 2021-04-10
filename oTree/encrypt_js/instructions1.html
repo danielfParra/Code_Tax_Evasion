@@ -1,0 +1,76 @@
+{{ block title }}Instructions{{ endblock }}
+{{ block content }}
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+        <h3>
+        Decoding Task
+    </h3>
+    <p>
+        You will perform an encoding task. Specifically, you will be given
+        sequences of three random capital letters. We call the three letters
+        combination a “Word” for simplicity.
+    </p>
+    <p>
+        You have to allocate a number to each capital letter.
+        The encoding code can be found in the table below the corresponding letter.
+        For each Word, the decoding table changes.
+    </p>
+    <p>
+        For illustration, consider the following screenshot:
+    </p>
+
+    <div class="card" style="width: 100%;">
+        <img src="{{ static 'screenshot.PNG' }}"/>
+        <div class="card-body">
+        </div>
+    </div>
+<p></p>
+    <p>
+        In this example, the three capital letters: “E”, “T” and “K” have to be encoded.
+        The solution follows immediately from the encoding table:
+
+    <ul>
+        <li>The encryption code for “E” is 627 (already entered by the participant)</li>
+        <li>The encryption code for “T” is 784 (already entered by the participant)</li>
+        <li>The encryption code for “K” is 333 (not entered yet by the participant)</li>
+    </ul>
+
+    <p>
+        You will have 5 minutes to encode as many words into numbers as possible correctly.
+        Note that each letter must be encoded correctly to continue to the next Word.
+    </p>
+    <p>
+        After completing all the letters of a Word, click on submit.
+        If the three letter codes are correct, a new word and a new encoding table will appear.
+        Otherwise, you will see an alert informing you that you have some mistakes in your encoding.
+    </p>
+    <p>
+        You have to check and correct the codes until the Word is correct.
+    </p>
+
+    <p>
+        Each new encoding table is randomly generated in two steps:
+
+        <ol>
+    <li> The computer program randomly selects in the table a new set of
+        three-digit numbers to be used for the capital letters encoding.</li>
+    <li>
+        Additionally, the computer program shuffles the position
+        of the capital letters in the table. Please note that the program always uses
+        all 26 capital letters of the alphabet. </li>
+</ol>
+
+
+    </p>
+
+
+    </div>
+        </p>
+
+    </div>
+
+    {{ next_button }}
+
+{{ endblock }}
