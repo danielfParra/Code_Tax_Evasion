@@ -1,0 +1,25 @@
+{{ block title }}
+    Summary
+{{ endblock }}
+
+{{ block content }}
+
+{{if decision}}
+<p>You earned {{ payoff_task1 }} in the first task.</p>
+
+<p> You decided to take the {{Constants.money_to_take}}.</p>
+
+<p> Then you final payoff is {{ payoff }}</p>
+
+{{else}}
+<p>You earned {{ payoff_task1 }} in the first task.</p>
+
+<p> You decided not to take the {{Constants.money_to_take}}.</p>
+
+<p> Then you final payoff is {{ payoff }}</p>
+{{ endif }}
+
+    {{ next_button }}
+{{ endblock }}
+
+

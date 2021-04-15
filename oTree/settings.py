@@ -1,18 +1,13 @@
 from os import environ
 
+PARTICIPANT_FIELDS = ['performance', 'earnings']
+
 SESSION_CONFIGS = [
     dict(
-        name='survey', app_sequence=['survey', 'payment_info'], num_demo_participants=1
-    ),
-    dict(
-        name='Trust', app_sequence=['trust'], num_demo_participants=2
-    ),
-    dict(
         name='encrypt_js',
-        display_name="WEDR Task",
-        num_demo_participants=1,
-        app_sequence=['encrypt_js'],
-        PARTICIPANT_FIELDS = ['temp_words_trial']
+        display_name="Public officials",
+        num_demo_participants=3,
+        app_sequence=['encrypt_js', 'Choice_PO'],
     )
 ]
 

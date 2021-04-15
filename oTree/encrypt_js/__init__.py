@@ -16,11 +16,11 @@ class Constants(BaseConstants):
 
     letters_per_word = 3
     use_timeout = True
-    seconds_per_period = 2*60
-    trial_words = 2
+    seconds_per_period = 60
+    trial_words = 1
 
     payoff_trial = cu(0.5)
-    piece_rate = cu(1)
+    piece_rate = cu(3)
 
 
 class Subsession(BaseSubsession):
@@ -51,14 +51,7 @@ class Player(BasePlayer):
 
     performance = models.IntegerField(initial=0, blank=True)
     mistakes = models.IntegerField(initial=0, blank=True)
-#Functions
 
-def calc_payoffs(group):
-    p1 = group.get_player_by_id(1)
-    trial_fee = Constants.payoff_trial
-    piece_rate = Constants.piece_rate
-    encoded_words = p1.performance
-    p1.payoff = trial_fee + (piece_rate*encoded_words)
 
 # Pages
 class instructions1(Page):
@@ -102,16 +95,21 @@ class Task(Page):
             task_width=task_width
         )
 
-class ResultsWaitPage(WaitPage):
-    after_all_players_arrive = calc_payoffs
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        trial_fee = Constants.payoff_trial
+        piece_rate = Constants.piece_rate
+        player.payoff = trial_fee + (piece_rate * player.performance)
 
 class Results(Page):
-    pass
-
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.performance = player.performance
+        player.participant.earnings = player.payoff
+        player.payoff = 0
 
 page_sequence = [instructions1,
                  instructions2,
                  Trial,
                  Task,
-                 ResultsWaitPage,
                  Results]
