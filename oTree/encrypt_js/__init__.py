@@ -55,10 +55,20 @@ class Player(BasePlayer):
 
 # Pages
 class instructions1(Page):
-    pass
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            minutes_task=Constants.seconds_per_period / 60
+        )
 
 class instructions2(Page):
-    pass
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            minutes_task=Constants.seconds_per_period / 60
+        )
+
 
 class Trial(Page):
     form_model = 'player'
@@ -75,6 +85,9 @@ class Trial(Page):
             task_width=task_width
         )
 
+class countdown(Page):
+    timeout_seconds = 15
+    timer_text = 'Now the 5 minutes task starts in:'
 
 class Task(Page):
     form_model = 'player'
@@ -101,15 +114,26 @@ class Task(Page):
         piece_rate = Constants.piece_rate
         player.payoff = trial_fee + (piece_rate * player.performance)
 
+
 class Results(Page):
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            payoff=player.payoff,
+            trial_payoff=Constants.payoff_trial,
+            task_payoff=Constants.piece_rate * player.performance
+        )
+
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         player.participant.performance = player.performance
         player.participant.earnings = player.payoff
         player.payoff = 0
 
+
 page_sequence = [instructions1,
                  instructions2,
                  Trial,
+                 countdown,
                  Task,
                  Results]

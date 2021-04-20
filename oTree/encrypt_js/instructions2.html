@@ -62,8 +62,7 @@ kbd {
 
     <div class="callout">
         Please note that the progress will reset if you reload the browser or close it.
-        So, be careful and not leave the page when completing the
-        encoding task or the practice phase.
+        So, be careful and do not leave the page when completing the encoding task.
         </div>
 
 
@@ -71,27 +70,33 @@ kbd {
 </div> </div>
 
   <p>
-        Before the the paid task you will have a practice phase where you have to encode
+      Before the {{ minutes_task|to0 }} minutes task you will have a practice round where you have to encode correctly 5 words.
+
+        Before the the paid task you will have a practice round where you have to encode
       correctly <b>{{Constants.trial_words}} words</b>.
   </p>
     <p>
-        The practice phase's general idea is to make you as familiar
+        The practice round's general idea is to make you as familiar
         as possible with the task before the actual task begins.
     </p>
   <p>
       As a compensation for your time, you will be paid {{Constants.payoff_trial}}
-      for completing the practice phase.
+      for completing the practice round.
   </p>
 <p>
     <b>
-        Therefore you should take the practice phase
-        seriously and try to solve the ten words as fast as possible!
+        Therefore you should take the practice round
+        seriously and try to solve the {{Constants.trial_words}} words as fast as possible!
     </b>
 </p>
   <p>
-        After the practice phase, you will have 5 minutes to encode correctly
-        as many words as you can.
+      After the practice round, you will have <b><u>{{ minutes_task|to0 }} minutes</u></b> to encode
+      correctly as many words into numbers as possible
         You will be paid {{Constants.piece_rate}} for each correct word.
+    </p>
+
+    <p>
+        Note that each letter must be encoded correctly to continue to the next Word.
     </p>
 
 

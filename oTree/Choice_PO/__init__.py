@@ -35,18 +35,18 @@ class Player(BasePlayer):
 
     q1PO = models.IntegerField(
         choices=[
-            [1, '{}'.format(Constants.wrong_value_controlQa)],
-            [2, '{}.'.format(Constants.money_to_take)],
-            [3, '{}.'.format(Constants.wrong_value_controlQb)],
+            [1, 'You would get {}'.format(Constants.wrong_value_controlQa)],
+            [2, 'You would get {}.'.format(Constants.money_to_take)],
+            [3, 'You would get {}.'.format(Constants.wrong_value_controlQb)],
         ],
         widget=widgets.RadioSelect,
     )
 
     q2PO = models.IntegerField(
         choices=[
-            [1, '{}'.format(Constants.payoff_not_take)],
-            [2, '{}.'.format(Constants.money_to_take)],
-            [3, '{}.'.format(Constants.wrong_value_controlQb)],
+            [1, 'You would get {}'.format(Constants.payoff_not_take)],
+            [2, 'You would get {}.'.format(Constants.money_to_take)],
+            [3, 'You would get {}.'.format(Constants.wrong_value_controlQb)],
         ],
         widget=widgets.RadioSelect,
     )
@@ -75,7 +75,8 @@ def q2PO_error_message(player, value):
 def q3PO_error_message(player, value):
     print('value is', value)
     if not value == 1:
-        return 'Recall: Players B have to pay the taxes anyway.'
+        return 'Recall: You do not affect Players B’s earnings because they have to pay taxes regardless of your ' \
+               'decision. '
 
 
 # FUNCTIONS

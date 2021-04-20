@@ -109,6 +109,10 @@ td {
     grid-template-rows: 1;
     grid-column-gap: 1vw
 }
+
+#finish {
+    display: none;
+}
 	#next
 	{
 		text-align: center;
@@ -119,7 +123,7 @@ td {
 
 
 {{ block title }}
-    Trial Period
+    Practice round
 {{ endblock }}
 
 {{ block content }}
@@ -178,6 +182,10 @@ td {
 
 </div>
 
+<div id="finish" class="alert alert-info" role="alert">
+  <h4>You have encrypted all the words of the practice round. Click on next to continue. </h4>
+</div>
+
 <button id="next" disabled class="btn btn-primary btn-lg" >Next</button>
 
 
@@ -228,6 +236,7 @@ function myFunction() {
       if (temp == {{Constants.trial_words}}) {
           document.getElementById("next").disabled = false;
           document.getElementById("submit").style.display="none";
+          document.getElementById("finish").style.display="block";
              }
 
       dict=genNewDict();
@@ -247,7 +256,7 @@ function myFunction() {
   else if (errors > 0) {
       var temp = Number(document.getElementById("mistakes_trial").value) + 1
       document.getElementById("mistakes_trial").value = temp;
-      document.getElementById("error-form").innerText = "There are "+errors+" mistakes on your answer. Check it out!";
+      document.getElementById("error-form").innerText = "There is(are) "+errors+" mistake(s) in your answer. Check it out!";
       document.getElementById("error-form").style.display = "block";
   }
 }
@@ -331,6 +340,8 @@ function genNewDict() {
 
 
 }
+
+
 
 </script>
 

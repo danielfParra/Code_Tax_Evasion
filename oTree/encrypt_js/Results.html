@@ -5,12 +5,47 @@
     Results Task 1
 {% endblock %}
 
+ <style>
+      p {
+        font-size:20px;
+      }
+      .payoff {
+        color: #0b5ed7;
+        font-weight:bold;
+      }
+      p.blocktext{
+    text-align: center;
+      }
+
+      hr {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border:2px solid;
+        border-radius: 5px;
+}
+    }
+ </style>
+
 {% block content %}
 
-    <p>You encoded {{ player.performance }} words correctly. Then, your profit is {{ player.payoff }}.</p>
+<div class="card border-dark mb-3">
+
+  <div class="card-body">
+      <p> You encoded <strong>{{ player.performance }}</strong> words correctly.
+          Then, your earnings in this task are the following:</p>
+
+      <p class="blocktext"> Practice round = <span class="payoff">{{trial_payoff}}</span>.</p>
+      <p class="blocktext">5 minutes task = <span class="payoff">{{task_payoff}}</span>.</p>
+
+      <hr>
+      <p class="blocktext"> <strong>Total earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
+
+      <br>
+ </div>
+</div>
 
 
-    {% next_button %}
-
+    {{ next_button }}
 
 {% endblock %}

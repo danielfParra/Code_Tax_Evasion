@@ -112,7 +112,6 @@ td {
     grid-template-rows: 1;
     grid-column-gap: 1vw
 }
-
 .otree-timer {
     font-size: large;
     text-align: center;
@@ -120,10 +119,9 @@ td {
     border: solid #6c757d;
     display: block;
     margin-left: auto;
-    width: 40%;
-    align-self: center;
-    align-items: center;
+    width: 30%;
     align-content: center;
+    position: relative;
 }
 
 </style>
@@ -256,7 +254,7 @@ function myFunction() {
   else if (errors > 0) {
       var temp = Number(document.getElementById("mistakes").value) + 1
       document.getElementById("mistakes").value = temp;
-      document.getElementById("error-form").innerText = "There are "+errors+" mistakes.";
+      document.getElementById("error-form").innerText = "There is(are) "+errors+" mistake(s) in your answer. Check it out!";
       document.getElementById("error-form").style.display = "block";
   }
 }
