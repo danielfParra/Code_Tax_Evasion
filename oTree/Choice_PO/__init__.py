@@ -12,13 +12,13 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    payoff_trial = cu(0.5)
-    piece_rate = cu(3)
-    money_to_take = cu(3)
+    payoff_trial = cu(0.3)
+    piece_rate = cu(0.05)
+    money_to_take = cu(0.63)
     tax_rate = 35
 
-    wrong_value_controlQa = cu(5)
-    wrong_value_controlQb = cu(2)
+    wrong_value_controlQa = cu(0.35)
+    wrong_value_controlQb = cu(0.4)
     payoff_not_take = cu(0)
 
 
@@ -55,8 +55,8 @@ class Player(BasePlayer):
         choices=[
             [1, 'Your decision affects Players B\'s earnings'],
             [2, 'You performed a encoding task in Part 1.'],
-            [3, 'The {} that you can take comes from the collected taxes that Players B '
-                'have to pay for sure.'.format(Constants.money_to_take)],
+            [3, 'The {} that you can take come from the collected taxes that '
+                'Players B pay for sure.'.format(Constants.money_to_take)],
         ],
         widget=widgets.RadioSelect,
     )

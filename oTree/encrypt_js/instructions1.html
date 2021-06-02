@@ -1,4 +1,4 @@
-{{ block title }}Instructions Task 1{{ endblock }}
+{{ block title }}Instructions Part 1{{ endblock }}
 {{ block content }}
 
 <div class="card bg-light m-3">
@@ -38,12 +38,13 @@
     </ul>
 
     <p>
-        You will have {{ minutes_task|to0 }} minutes to encode as many words into numbers as possible correctly.
+        You will have {{ minutes_task|to0 }} minutes to encode as many words into numbers as possible.
         Note that each letter must be encoded correctly to continue to the next Word.
+        You will be paid {{ Constants.piece_rate }} for each correct Word.
     </p>
     <p>
         After completing all the letters of a Word, click on submit.
-        If the three letter codes are correct, a new word and a new encoding table will appear.
+        If the three letter codes are correct, a new Word and a new encoding table will appear.
         Otherwise, you will see an alert informing you that you have some mistakes in your encoding.
     </p>
     <p>

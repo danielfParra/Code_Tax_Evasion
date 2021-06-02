@@ -30,10 +30,10 @@
 {{if decision}}
 <div class="card border-dark mb-3">
   <div class="card-body">
-    <p class="card-text"> <h5>Your earnings in the tasks are the following:</h5></p>
+    <p class="card-text"> <h5>Your final earnings are the following</h5></p>
 
-        <p class="blocktext"> Your earnings in task 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
-    <p class="blocktext">  You decided to take = <span class="payoff">{{Constants.money_to_take}}</span></p>
+        <p class="blocktext"> Your earnings in Part 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
+    <p class="blocktext">  Your earnings in Part 2  = <span class="payoff">{{Constants.money_to_take}}</span></p>
         <hr>
       <p class="blocktext"> <strong>Final earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
 
@@ -43,10 +43,10 @@
 {{else}}
 <div class="card border-dark mb-3">
   <div class="card-body">
-    <p class="card-text"> <h5>Your earnings in the tasks are the following:</h5></p>
+    <p class="card-text"> <h5>Your final earnings are the following</h5></p>
 
-    <p class="blocktext"> Your earnings in task 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
-    <p class="blocktext">  You decided not to take = <span class="payoff"> 0</span></p>
+    <p class="blocktext"> Your earnings in Part 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
+    <p class="blocktext">  Your earnings in Part 2 = <span class="payoff"> 0</span></p>
         <hr>
       <p class="blocktext"> <strong>Final earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
   </div></div>

@@ -16,11 +16,11 @@ class Constants(BaseConstants):
 
     letters_per_word = 3
     use_timeout = True
-    seconds_per_period = 60
-    trial_words = 1
+    seconds_per_period = 2*60
+    trial_words = 2
 
-    payoff_trial = cu(0.5)
-    piece_rate = cu(3)
+    payoff_trial = cu(0.3)
+    piece_rate = cu(0.05)
 
 
 class Subsession(BaseSubsession):
@@ -86,8 +86,8 @@ class Trial(Page):
         )
 
 class countdown(Page):
-    timeout_seconds = 15
-    timer_text = 'Now the 5 minutes task starts in:'
+    timeout_seconds = 10
+    timer_text = 'Now the encryption starts in:'
 
 class Task(Page):
     form_model = 'player'
@@ -121,7 +121,8 @@ class Results(Page):
         return dict(
             payoff=player.payoff,
             trial_payoff=Constants.payoff_trial,
-            task_payoff=Constants.piece_rate * player.performance
+            task_payoff=Constants.piece_rate * player.performance,
+            minutes_task=Constants.seconds_per_period / 60
         )
 
     @staticmethod

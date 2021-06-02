@@ -11,7 +11,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    completion_fee = cu(1)
+    completion_fee = cu(1.1)
 
     # treatments = ['baseline', 'noavoid', 'noext','simult']
 
