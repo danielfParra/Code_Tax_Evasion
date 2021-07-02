@@ -1,30 +1,51 @@
-{{ block title }}Thank you{{ endblock }}
-{{ block content }}
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+Thank you for participation in this study!
+{% endblock %}
+
+{% block content %}
+
+<div class="card border-secondary mb-3">
+  <div class="card-header">
+    <h5>Payment</h5>
+  </div>
+  <div class="card-body"
+       title="In case something went wrong, please make a screenshot and contact us via Prolific.">
+
 
     <p>
-        <em>Below are examples of messages that could be displayed for different experimental settings.</em>
+      For your participation in this study you will receive
+      {{ Prolific_fixed_payoff }} and on your Prolific account
+      <b>{{ participant.label }}</b>. Based on your decisions you will
+      receive the additional {{ payoff }} in a form of a bonus after
+      the end of the study. The latter might take some time, so we ask
+      you to be patient.
     </p>
 
-    <div class="panel panel-default" style="margin-bottom:10px">
-        <div class="panel-body">
-            <p><b>Laboratory:</b></p>
-            <p>Please remain seated until your number is called. Then take your number card, and proceed to the cashier.</p>
-            <p><em>Note: For the cashier in the laboratory, oTree can print a list of payments for all participants as a PDF.</em></p>
-        </div>
+<div class="card border-secondary mb-3">
+  <div class="card-header">
+    <h5>Contact</h5>
+  </div>
+  <div class="card-body">
+    <p>
+      For further questions please contact us under
+      <a href="mailto:prolificstudy@wzb.eu?subject=WZB%20Prolific%20study">
+        prolificstudy@wzb.eu
+      </a>
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="btn-group float-right">
+        <div class="pl-3">{% next_button %}</div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="panel panel-default" style="margin-bottom:10px">
-        <div class="panel-body">
-            <p><b>Classroom:</b></p>
-            <p><em>If you want to keep track of how students did, the easiest thing is to assign the starting links to students by name.
-                It is even possible to give each student a single permanent link for a whole semester using Rooms;
-                so no need to waste time in each lecture with handing out new links and keeping track of which student uses which link.
-                Alternatively, you may just give
-                students anonymous links or secret nicknames.</em>
-            </p>
-        </div>
-    </div>
-
-
-{{ endblock }}
-
+{% endblock %}

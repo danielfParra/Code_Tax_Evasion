@@ -17,31 +17,62 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    age = models.IntegerField(label='What is your age?', min=13, max=125)
-    gender = models.StringField(
-        choices=[['Male', 'Male'], ['Female', 'Female']],
-        label='What is your gender?',
-        widget=widgets.RadioSelect,
+    # Demographics
+    age = models.IntegerField(label='Age', min=13, max=125)
+
+    gender = models.IntegerField(
+        label='Gender',
+        choices=[[0, 'Male'], [1, 'Female'], [2, 'Rather not say'], [3, 'Other']]
     )
-    crt_bat = models.IntegerField(
-        label='''
-        A bat and a ball cost 22 dollars in total.
-        The bat costs 20 dollars more than the ball.
-        How many dollars does the ball cost?'''
+    gender_add = models.StringField(blank=True, label='')
+    education = models.IntegerField(
+        choices=[[0, 'Less than High School'],
+                 [1, 'High School'],
+                 [2, 'Some College'],
+                 [3, 'Associate Degree'],
+                 [4, 'Bachelor\'s Degree'],
+                 [5, 'Advanced or Professional Degree']
+                 ],
+        label='What is your highest level of education?'
     )
-    crt_widget = models.IntegerField(
-        label='''
-        "If it takes 5 machines 5 minutes to make 5 widgets,
-        how many minutes would it take 100 machines to make 100 widgets?"
-        '''
+    student = models.IntegerField(
+        label='Are you currently enrolled in college?',
+        choices=[[0, 'No'], [1, 'Yes']]
     )
-    crt_lake = models.IntegerField(
-        label='''
-        In a lake, there is a patch of lily pads.
-        Every day, the patch doubles in size.
-        If it takes 48 days for the patch to cover the entire lake,
-        how many days would it take for the patch to cover half of the lake?
-        '''
+    experiments = models.IntegerField(
+        label='Please give a rough estimate about the number of experiments you have participated in before',
+        blank=True
+    )
+
+    reasoning = models.LongStringField(
+        label='Please give a concise explanation of how you took your decisions in the experiment',
+        blank=True
+    )
+
+    religion = models.IntegerField(
+        choices=[[1, 'Baha\'i'],
+                 [2, 'Buddhism'],
+                 [3, 'Candomble'],
+                 [4,
+                  'Christianity (e.g. Baptist, Church of England, Roman Catholic, Methodist, Jehovah Witness, etc.)'],
+                 [5, 'Hinduism'],
+                 [6, 'Islam'],
+                 [7, 'Jainism'],
+                 [8, 'Judaism'],
+                 [9, 'Non Religious (e.g. Agnostic, Atheist, No Religion)'],
+                 [10, 'Paganism'],
+                 [11, 'Rastafari'],
+                 [12, 'Santeria'],
+                 [13, 'Shinto'],
+                 [14, 'Sikhism'],
+                 [15, 'Spiritualism'],
+                 [16, 'Taoism'],
+                 [17, 'Unitarianism'],
+                 [18, 'Zorastrianism'],
+                 [19, 'Other'],
+                 [0, 'Do Not Wish to Answer'],
+                 ],
+        label='What is your religious affiliation?'
     )
 
 
@@ -49,12 +80,8 @@ class Player(BasePlayer):
 # PAGES
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['age', 'gender']
+    form_fields = ['age', 'gender', 'gender_add', 'education', 'student', 'experiments', 'reasoning', 'religion']
 
 
-class CognitiveReflectionTest(Page):
-    form_model = 'player'
-    form_fields = ['crt_bat', 'crt_widget', 'crt_lake']
 
-
-page_sequence = [Demographics, CognitiveReflectionTest]
+page_sequence = [Demographics]

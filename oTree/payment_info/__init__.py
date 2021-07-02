@@ -1,10 +1,7 @@
 from otree.api import *
-c = Currency  # old name for currency; you can delete this.
-
 
 doc = """
-This application provides a webpage instructing participants how to get paid.
-Examples are given for the lab and Amazon Mechanical Turk (AMT).
+Payment information and redirect Prolific
 """
 
 
@@ -12,6 +9,8 @@ class Constants(BaseConstants):
     name_in_url = 'payment_info'
     players_per_group = None
     num_rounds = 1
+
+    completion_fee = cu(1.1)
 
 
 class Subsession(BaseSubsession):
@@ -32,7 +31,17 @@ class PaymentInfo(Page):
     @staticmethod
     def vars_for_template(player: Player):
         participant = player.participant
-        return dict(redemption_code=participant.label or participant.code)
+        payoff = player.participant.payoff
+        Prolific_fixed_payoff = Constants.completion_fee
+        return dict(
+            redemption_code=participant.label,
+            Prolific_fixed_payoff=Prolific_fixed_payoff,
+            payoff=payoff,
+        )
 
 
-page_sequence = [PaymentInfo]
+class RedirectProlific(Page):
+    pass
+
+
+page_sequence = [PaymentInfo, RedirectProlific]

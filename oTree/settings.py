@@ -7,7 +7,7 @@ SESSION_CONFIGS = [
         name='encrypt_js',
         display_name="Public officials",
         num_demo_participants=3,
-        app_sequence=['welcome', 'encrypt_js', 'Choice_PO'],
+        app_sequence=['welcome', 'encrypt_js', 'Choice_PO', 'survey', 'payment_info'],
     )
 ]
 
