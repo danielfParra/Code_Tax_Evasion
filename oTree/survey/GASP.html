@@ -1,0 +1,52 @@
+{{ block title }}Survey{{ endblock }}
+{{ block content }}
+
+<style>
+tr:nth-child(even) {background-color: #f9f9f9; width: 10%}
+th {
+    text-align:center;
+}
+td {
+    text-align:left;
+    font-weight: normal;
+}
+</style>
+
+    <p>
+        In this questionnaire you will read about situations that people are likely to
+encounter in day‐to‐day life, followed by common reactions to those situations. As you read
+each scenario, try to imagine yourself in that situation. Then indicate the likelihood that you
+would react in the way described.
+    </p>
+
+<table class="table" >
+
+<tr>
+<th> <div><br></div>  </th>
+<th> <br><div>Very<br>Unlikely</div> 1 </th>
+<th> <br><br><div>Unlikely<br> </div> 2 </th>
+<th> <br><div>Slightly<br>Unlikely</div> 3 </th>
+<th> <div>About 50%<br>Likely</div> 4 </th>
+<th> <br><div>Slightly<br>Likely</div> 5 </th>
+<th> <br><br><div>Likely<br> </div> 6 </th>
+<th> <br><div>Very<br>Likely</div> 7 </th>
+<th></th>
+
+</tr>
+
+    {{ for field in form }}
+        <tr>
+            <td>{{ field.label }}</td>
+            {{ for choice in field }}
+                <th>{{ choice }}</th>
+            {{ endfor }}
+        </tr>
+    {{ endfor }}
+</table>
+
+
+
+
+    {{ next_button }}
+
+{{ endblock }}

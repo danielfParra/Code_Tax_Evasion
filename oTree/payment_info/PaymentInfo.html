@@ -1,11 +1,11 @@
-{% extends "global/Page.html" %}
-{% load otree %}
+{{ extends "otree/Page.html" }}
+{{ load otree }}
 
-{% block title %}
+  {{ block title }}
 Thank you for participation in this study!
-{% endblock %}
+  {{ endblock }}
 
-{% block content %}
+  {{ block content }}
 
 <div class="card border-secondary mb-3">
   <div class="card-header">
@@ -42,10 +42,10 @@ Thank you for participation in this study!
   <div class="row">
     <div class="col">
       <div class="btn-group float-right">
-        <div class="pl-3">{% next_button %}</div>
+        <div class="pl-3">{{ next_button }}</div>
       </div>
     </div>
   </div>
 </div>
 
-{% endblock %}
+  {{ endblock }}
