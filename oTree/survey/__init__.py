@@ -27,13 +27,13 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Demographics
-    age = models.IntegerField(label='Age', min=13, max=125)
+    age = models.IntegerField(label='What is your age?', min=13, max=100)
 
     gender = models.IntegerField(
-        label='Gender',
+        label='What is your gender?',
         choices=[[0, 'Male'], [1, 'Female'], [2, 'Rather not say'], [3, 'Other']]
     )
-    gender_add = models.StringField(blank=True, label='')
+
     education = models.IntegerField(
         choices=[[0, 'Less than High School'],
                  [1, 'High School'],
@@ -81,7 +81,7 @@ class Player(BasePlayer):
                  [19, 'Other'],
                  [0, 'Do Not Wish to Answer'],
                  ],
-        label='What is your religious affiliation?'
+        label='What is your religious affiliation (If any)?'
     )
 
     q1_GASP = make_field('After realizing you have received too much change at a store, you decide to keep it because '
@@ -135,7 +135,7 @@ class Player(BasePlayer):
 # PAGES
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['age', 'gender', 'gender_add', 'education', 'student', 'experiments', 'reasoning', 'religion']
+    form_fields = ['age', 'gender', 'education', 'student', 'experiments', 'reasoning', 'religion']
 
 
 class GASP(Page):
