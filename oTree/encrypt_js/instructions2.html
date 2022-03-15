@@ -1,4 +1,7 @@
-{{ block global_styles  }}
+{{ block styles  }}
+<link href="{{ static 'myStyleButton.css' }}" rel="stylesheet"/>
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
 <style>
 kbd {
     border: 1px solid #aaa;
@@ -45,7 +48,9 @@ kbd {
 
 {{ endblock }}
 
-{{ block title }}Instructions Part 1{{ endblock }}
+{{ block title }}
+Instructions Part 1
+{{ endblock }}
 
 {{ block content }}
 
@@ -64,11 +69,13 @@ kbd {
         Please note that the progress will reset if you reload the browser or close it.
         So, be careful and do not leave the page when completing the encoding task.
         </div>
-
-
       </p>
 </div> </div>
 
+<p>
+    <input id="info_button1" type="button" value="&#xf178" onclick="button_click(info_button1, paragraph1);" />
+</p>
+<div id="paragraph1" class="hidden-paragraph">
   <p>
       Before the {{ minutes_task|to0 }} minutes task you will have a practice round where
       you have to encode correctly <b>{{Constants.trial_words}} words</b>.
@@ -81,12 +88,28 @@ kbd {
       As a compensation for your time, you will be paid {{Constants.payoff_trial}}
       for completing the practice round.
   </p>
+
+
+<p>
+    <input id="info_button2" type="button" value="&#xf178" onclick="button_click(info_button2, paragraph2);" />
+</p>
+    </div>
+
+<div id="paragraph2" class="hidden-paragraph">
+
 <p>
     <b>
         Therefore you should take the practice round
         seriously and try to solve the {{Constants.trial_words}} words as fast as possible!
     </b>
 </p>
+
+
+<p><input id="info_button3" type="button" value="&#xf178" onclick="buttonAppear();button_click(info_button3, paragraph3);" />
+    </p>
+</div>
+
+<div id="paragraph3" class="hidden-paragraph">
   <p>
       After the practice round, you will have <b><u>{{ minutes_task|to0 }} minutes</u></b> to encode
       correctly as many words into numbers as possible.
@@ -97,7 +120,21 @@ kbd {
         Note that each letter must be encoded correctly to continue to the next Word.
     </p>
 
+</div>
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
 
-    {{ next_button }}
 
 {{ endblock }}
+
+{% block scripts %}
+
+<!-- Load the custom javascript functions -->
+<script src="{% static 'myJs.js' %}"></script>
+<script src="https://kit.fontawesome.com/46026ecfac.js" crossOrigin="anonymous"></script>
+
+{% endblock %}
+
+
+

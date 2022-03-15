@@ -1,11 +1,7 @@
-{% extends "global/Page.html" %}
-{% load otree static %}
-
-{% block title %}
+{{ block title }}
 Comprehension questions
-{% endblock %}
+{{ endblock }}
 
-{% block content %}
 {{ block styles }}
 <!-- Load the custom css styles -->
 <link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
@@ -45,15 +41,17 @@ Comprehension questions
 
 {{ endblock }}
 
+{{ block content }}
+
 
 <div class="card border-warning m-3">
     <div class="card-body">
 
-{{ formfield  'q1PO' label="1. If your decision is <em><u>to take</u></em>, how much would you get as a payment in addition to your earnings in Part 1?" }}
+{{ formfield  'q1TP' label="1. Imagine a situation where you report that your income from Part 1 is &#163;2, how much is your total earnings after taxes?" }}
 
-{{ formfield  'q2PO' label="2. If your decision is <em><u>not to take</u></em>, how much would you get as a payment in addition to your earnings in Part 1?" }}
+{{ formfield  'q2TP' label="2. Who knows what your actual income is?" }}
 
-{{ formfield  'q3PO' label="3. Which of the following statements is <em><u>false</u></em>?" }}
+{{ formfield  'q3TP' label="3. Which of the following statements is <em><u>false</u></em>?" }}
     </div></div>
 
 <br>
@@ -66,6 +64,6 @@ Comprehension questions
 Please note that the experiment does not contain any further comprehension
     questions or attention checks from this point on!</div>
 
-{% next_button %}
+{{ next_button }}
 
-{% endblock %}
+{{ endblock }}

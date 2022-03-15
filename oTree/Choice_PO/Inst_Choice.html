@@ -1,9 +1,13 @@
 {{ block title }}Instructions Part 2{{ endblock }}
 {{ block content }}
 
-<style>
-    h4 {text-align: center;}
-</style>
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+<link href="{{ static 'myStyleButton.css' }}" rel="stylesheet"/>
+
+{{ endblock }}
+
 
 <div class="card bg-light m-3">
     <div class="card-body">
@@ -14,12 +18,26 @@
     </p>
 
     <p>
+    <input id="info_button1" type="button" value="&#xf178" onclick="button_click(info_button1, paragraph1);" />
+    </p>
+
+    <div id="paragraph1" class="hidden-paragraph">
+
+    <p>
         <strong>Players B</strong> will participate in a game in which they perform the same encoding task
         you did in Part 1.
     </p>
     <p>
         They, as well as you, are paid for doing the same task you did in Part 1.
     </p>
+
+        <p>
+    <input id="info_button2" type="button" value="&#xf178" onclick="button_click(info_button2, paragraph2);" />
+    </p>
+
+        </div>
+
+        <div id="paragraph2" class="hidden-paragraph">
 
      <p>
         <strong>Players B</strong> are asked to pay a {{Constants.tax_rate}}% tax on their self-reported earnings.
@@ -31,6 +49,13 @@
          The money will be used to support its actions of reducing litter, improving local places,
          and preventing waste.
      </p>
+
+       <p>
+    <input id="info_button3" type="button" value="&#xf178" onclick="button_click(info_button3, paragraph3);" />
+    </p>
+        </div>
+
+            <div id="paragraph3" class="hidden-paragraph">
 
      <p>
          As <strong>Player A</strong>, you will decide <strong>whether to take {{Constants.money_to_take}} or not
@@ -46,6 +71,13 @@
      <p>
          <i>Your decision, whichever it is, does not affect Players B's earnings.</i>
      </p>
+
+               <p>
+    <input id="info_button5" type="button" value="&#xf178" onclick="buttonAppear(); button_click(info_button5, paragraph5);" />
+    </p>
+    </div>
+
+    <div id="paragraph5" class="hidden-paragraph">
 
         <div class="card">
   <div class="card-header">
@@ -69,12 +101,29 @@
   </div>
 
 </div>
-        <p></p>
+        <br>
+        <p>
         <i> Before starting, we’d like you to answer the questions on the next page to check your understanding.</i>
+</p>
+</div>
+    </div></div>
 
+<div id="next" style="display: none">
+        {{ next_button }}
 </div>
-</div>
-       {{ next_button }}
 
 
 {{ endblock }}
+
+{% block scripts %}
+
+<!-- Load the custom javascript functions -->
+
+
+<script src="{% static 'myJs.js' %}"></script>
+<script src="https://kit.fontawesome.com/46026ecfac.js" crossOrigin="anonymous"></script>
+
+{% endblock %}
+
+
+

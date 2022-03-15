@@ -1,0 +1,130 @@
+{{ block title }}Instructions Part 2{{ endblock }}
+{{ block content }}
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+<link href="{{ static 'myStyleButton.css' }}" rel="stylesheet"/>
+
+{{ endblock }}
+
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+    <p>
+        You have being assigned to the role of <strong>Player B</strong> and you are part of a group of 3
+        participants (including you). The 3 members of your group are all <strong>Players B</strong>.
+    </p>
+
+    <p>
+    <input id="info_button1" type="button" value="&#xf178" onclick="button_click(info_button1, paragraph1);" />
+    </p>
+
+        <div id="paragraph1" class="hidden-paragraph">
+    <p> All members of your group participated in Part 1 and earned an income from it.</p>
+
+    <p> You are now asked to report the income you earned in Part 1, to calculate your final
+        earnings. <strong>The income that you report will be taxed at the rate of {{Constants.tax_rate}}%</strong>.
+    </p>
+
+    <p>
+    <input id="info_button2" type="button" value="&#xf178" onclick="button_click(info_button2, paragraph2);" />
+    </p>
+
+        </div>
+
+        <div id="paragraph2" class="hidden-paragraph">
+
+    <p> The other Players B in your group are also asked to report their incomes for taxation. Your income
+    report, as well as the income report of the other players in your group, is completely private.
+        <strong>You won't know their income report, and they won't know yours</strong>.
+
+     <p>
+
+    <p>
+         Taxes collected will be <strong>doubled</strong> and given to the organisation
+         <strong>Keep Britain Tidy</strong> at the end of this study.
+         The money will be used to support its actions of reducing litter, improving local places,
+         and preventing waste.
+     </p>
+
+    <p>
+    <input id="info_button3" type="button" value="&#xf178" onclick="button_click(info_button3, paragraph3);" />
+    </p>
+        </div>
+
+            <div id="paragraph3" class="hidden-paragraph">
+    <p> Your group is going to be randomly matched with 1 Player A out of 10 Players A. The
+    10 Players A already decided whether to take {{Constants.money_to_take}} from the collected taxes of the
+    group of Players B they are going to be matched with.
+        </p>
+
+    <p> They could take the {{Constants.money_to_take}} from the collected taxes before being doubled
+        and transferred to Keep Britain Tidy. These {{Constants.money_to_take}} points correspond to the
+        collected taxes coming from the group of Players B's earnings in the practice round in Part 1.
+    </p>
+
+        <p>
+    <input id="info_button4" type="button" value="&#xf178" onclick="button_click(info_button4, paragraph4);" />
+    </p>
+            </div>
+    <div id="paragraph4" class="hidden-paragraph">
+     <p>
+         As <strong>Player A</strong>, you will decide <strong>whether to take {{Constants.money_to_take}} or not
+         from the collected taxes</strong> before being doubled and transferred to
+         <strong>Keep Britain Tidy</strong>.
+     </p>
+
+     <p> Out of the 10 Players A, {{Constants.corruptPO_high}} decided to take the {{Constants.money_to_take}},
+         and {{Constants.no_corruptPO_high}} decided not to take it.
+         This means that your group has a probability of {{ Constants.corruptPO_high }}/10 to be
+         randomly matched with a Player A who decided to take the {{ Constants.money_to_take }}.
+     </p>
+
+        <p> Your income-report decision, which ever it is, <strong>does not affect Player A's earnings</strong>.
+            And your earnings are not affected by the decision, which ever it is, of the Player A you are going to
+            be randomly matched with.
+        </p>
+
+            <p>
+    <input id="info_button5" type="button" value="&#xf178" onclick="buttonAppear(); button_click(info_button5, paragraph5);" />
+    </p>
+    </div>
+
+    <div id="paragraph5" class="hidden-paragraph">
+        <div class="card">
+  <div class="card-header">
+   <h4> What will your final earnings be?</h4>
+  </div>
+  <div class="card-body">
+      <p class="blocktext"> Your earnings  = <span class="payoff"> Your income - (the income that you report &times; {{Constants.tax_rate}}%)</span></p>
+<br>
+
+  </div>
+
+</div>
+        <p>
+        <i> Before starting, we’d like you to answer the questions on the next page to check your understanding.</i>
+</p>
+</div>
+</div>
+</div>
+<br>
+
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
+
+
+{{ endblock }}
+
+{% block scripts %}
+
+<!-- Load the custom javascript functions -->
+
+
+<script src="{% static 'myJs.js' %}"></script>
+<script src="https://kit.fontawesome.com/46026ecfac.js" crossOrigin="anonymous"></script>
+
+{% endblock %}

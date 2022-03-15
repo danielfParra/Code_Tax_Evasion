@@ -1,0 +1,36 @@
+{{ block title }}
+    Hello Daniel
+{{ endblock }}
+{{ block content }}
+
+HELLO
+
+
+<!-- This is your code for the button. The button_click() function is defined in "myJs.js", which is in the _static folder. The function (i) shows the new paragraph and (ii) makes the button disappear. You can pass on two arguments; first, the button so that it disappears and second the paragraph that you want to make appear. -->
+<p>
+    <input id="info_button" type="button" value=">>" onclick="button_click(info_button, new_paragraph);" />
+</p>
+
+<!-- "the myStyle.css" file in the _static folder defines the hidden-paragraph class. Everything that you put in a div with this class will be invisible to users. -->
+<div id="new_paragraph" class="hidden-paragraph">
+<p>
+    Daniel
+</p>
+</div>
+
+{{ endblock }}
+
+{% block scripts %}
+
+<!-- Load the custom javascript functions -->
+<script src="{% static 'myJs.js' %}"></script>
+
+{% endblock %}
+
+{% block styles %}
+
+<!-- Load the custom css styles -->
+
+<link href="{{ static 'myStyleButton.css' }}" rel="stylesheet"/>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{{ block title }}
+    Your decision
+{{ endblock }}
+
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+
+{{ block content }}
+
+{{if corruption_level}}
+
+<div class="card w-90">
+  <div class="card-body">
+      <p> Recall: out of the 10 Players A, <strong><b>{{ Constants.corruptPO_high }}</b> decided to take the
+          {{ Constants.money_to_take }}</strong>, and <b>{{ Constants.no_corruptPO_high }}</b> decided not
+          to take it.
+</p>
+
+{{else}}
+
+<div class="card w-90">
+  <div class="card-body">
+      <p> Recall: out of the 10 Players A, <strong><b>{{ Constants.corruptPO_low}}</b> decided to take the
+          {{ Constants.money_to_take }}</strong>, and <b>{{ Constants.no_corruptPO_low }}</b> decided not
+          to take it.
+</p>
+
+{{ endif }}
+
+    <h5 class="card-title">Move the slider to report your income.</h5>
+
+
+      <input max="4" min="{{payoff_trial}}" name="reported_income" oninput="updateDescription(this)" step="0.01"
+             type="range" class="form-range">
+
+      <h5 id="description"></h5>
+<!-- by leaving the description blank initially, we prompt the user to move the slider,
+reducing the anchoring/default effect. -->
+  </div>
+</div>
+
+<script>
+    let description = document.getElementById('description');
+    function updateDescription(input) {
+        let reported_income = parseFloat(input.value).toFixed(2);
+        let tax = parseFloat(js_vars.tax_rate*reported_income).toFixed(2);
+        description.innerText = `Your reported income: ${reported_income}. You would pay ${tax} on taxes. `
+    }
+</script>
+
+
+<br>
+
+{{ next_button }}
+
+{{ formfield_errors 'reported_income' }}
+
+{{ endblock }}

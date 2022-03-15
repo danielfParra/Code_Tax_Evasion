@@ -1,6 +1,8 @@
 from os import environ
 
-PARTICIPANT_FIELDS = ['performance', 'earnings']
+PARTICIPANT_FIELDS = ['performance', 'earnings', 'embezzle', 'cluster_number', 'corruption_level', 'participant_label_exp1']
+
+
 
 SESSION_CONFIGS = [
     dict(
@@ -8,6 +10,12 @@ SESSION_CONFIGS = [
         display_name="Public officials",
         num_demo_participants=3,
         app_sequence=['welcome', 'encrypt_js', 'Choice_PO', 'survey', 'payment_info'],
+    ),
+    dict(
+        name='taxes',
+        display_name="TaxPayers",
+        num_demo_participants=30,
+        app_sequence=['welcome_Tax_Payers', 'encrypt_js', 'Choice_TaxPayer', 'survey', 'payment_info'],
     )
 ]
 
@@ -30,12 +38,13 @@ USE_POINTS = False
 
 ROOMS = [
     dict(
-        name='econ101',
-        display_name='Econ 101 class',
-        participant_label_file='_rooms/econ101.txt',
+        name='pjuly',
+        display_name='Pilot 30Jul 2021)',
     ),
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
 ]
+
+
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable

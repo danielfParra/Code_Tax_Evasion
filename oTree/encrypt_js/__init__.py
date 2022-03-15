@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     letters_per_word = 3
     use_timeout = True
     seconds_per_period = 2*60
-    trial_words = 2
+    trial_words = 1
 
     payoff_trial = cu(0.3)
     piece_rate = cu(0.05)
