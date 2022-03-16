@@ -1,0 +1,77 @@
+
+{{ block title }}
+   Learn the public official of your group.
+{{ endblock }}
+
+
+  {{ block content }}
+  <style>
+  canvas.tutCanvas, div.tutCanvas {
+    border: 1px solid #cccccc;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 5px;
+
+}  </style>
+
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+<!--
+<script>
+    $(window).bind('beforeunload',function() {
+    return "'Are you sure you want to leave the page? All data will be lost!";
+});
+</script>
+-->
+
+<script src="{% static 'Winwheel.js' %}"></script>
+<script src="{% static 'TweenMax.min.js' %}"></script>
+
+<p>
+    To learn whether you are matched with a public official who decided to take the {{Constants.money_to_take}}
+    or with a public official who decided not to do so, <strong> click on "Spin the Wheel".</strong>
+</p>
+
+<p> Recall: out of the 10 Players A, <strong><b>{{ Constants.corruptPO_high }}</b> decided to take the
+          {{ Constants.money_to_take }}</strong>, and <b>{{ Constants.no_corruptPO_high }}</b> decided not
+          to take it.
+</p>
+
+    {{ if decision_PO }}
+
+    <table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_take_highcorruption.js' }}"></script>
+
+{{ else }}
+
+    <table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_Notake_highcorruption.js' }}"></script>
+
+{{ endif }}
+
+<div id="finish" style="display: none" class="alert alert-info" role="alert">
+  <h4>You have encrypted all the words of the practice round. Click on next to continue. </h4>
+</div>
+
+
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
+
+{{ endblock }}
+

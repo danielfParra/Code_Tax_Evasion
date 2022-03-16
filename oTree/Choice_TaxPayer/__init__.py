@@ -150,6 +150,15 @@ class Decision_TP(Page):
         )
 
 
+class Takeweel(Page):
+    @staticmethod
+    def vars_for_template(player: Player):
+        decision_PO = player.participant.embezzle
+        return dict(
+            decision_PO=decision_PO
+        )
+
+
 class Feedback_TP(Page):
     @staticmethod
     def vars_for_template(player: Player):
@@ -165,4 +174,4 @@ class Feedback_TP(Page):
         )
 
 
-page_sequence = [Inst_ChoiceTP, Control_Q_TP, Decision_TP, Feedback_TP]
+page_sequence = [Inst_ChoiceTP, Control_Q_TP, Decision_TP, Takeweel, Feedback_TP]
