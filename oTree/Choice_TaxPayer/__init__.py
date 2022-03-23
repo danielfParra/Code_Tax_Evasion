@@ -12,8 +12,8 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    payoff_trial = cu(0.3)
-    piece_rate = cu(0.05)
+    payoff_trial = cu(0.6)
+    piece_rate = cu(0.13)
     money_to_take = cu(0.63)
     tax_rate = 35
     corruptPO_high = 9  # Number of participants that embezzle in high
@@ -21,10 +21,10 @@ class Constants(BaseConstants):
     corruptPO_low = 2  # Number of participants that embezzle in low
     no_corruptPO_low = 8  # Number of participants that embezzle in high
 
-    wrong_value_controlQa = cu(2)
-    right_value_Qa = cu(1.3)
-    wrong_value_controlQb = cu(0.5)
-    income_Q1 = cu(2)
+    wrong_value_controlQa = cu(0.5)
+    right_value_Qa = cu(0.35)
+    wrong_value_controlQb = cu(0.85)
+    income_Q1 = cu(1)
     payoff_not_take = cu(0)
 
 
@@ -53,16 +53,15 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    reported_income = models.FloatField(min=Constants.payoff_trial, max=4)
-
+    reportedIncome = models.FloatField()
     embezzle = models.BooleanField()
     corruption_level = models.BooleanField()
 
     q1TP = models.IntegerField(
         choices=[
-            [1, 'You would get {}.'.format(Constants.wrong_value_controlQa)],
-            [2, 'You would get {}.'.format(Constants.right_value_Qa)],
-            [3, 'You would get {}.'.format(Constants.wrong_value_controlQb)],
+            [1, 'You would pay {}.'.format(Constants.wrong_value_controlQa)],
+            [2, 'You would pay {}.'.format(Constants.right_value_Qa)],
+            [3, 'You would pay {}.'.format(Constants.wrong_value_controlQb)],
         ],
         widget=widgets.RadioSelect,
     )
@@ -80,11 +79,12 @@ class Player(BasePlayer):
         choices=[
             [1, 'Your decision affects Players A\'s earnings'],
             [2, 'You performed a encoding task in Part 1.'],
-            [3, 'The {} that Player A can take correspond to the collected taxes coming'
+            [3, 'The {} that Player A can take correspond to the collected taxes coming '
                 'from your group\'s earnings in the practice round in Part 1.'.format(Constants.money_to_take)],
         ],
         widget=widgets.RadioSelect,
     )
+
 
 
 def q1TP_error_message(player, value):
@@ -110,7 +110,11 @@ def q3TP_error_message(player, value):
 # PAGES
 
 class Inst_ChoiceTP(Page):
-    pass
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            red_high=Constants.corruptPO_high,
+        )
 
 
 class Control_Q_TP(Page):
@@ -128,27 +132,30 @@ class Control_Q_TP(Page):
 
 class Decision_TP(Page):
     form_model = "player"
-    form_fields = ["reported_income"]
+    form_fields = ["reportedIncome"]
 
     @staticmethod
     def before_next_page(player, timeout_happened):
         income = player.participant.earnings
-        reported_income = player.reported_income
-        player.payoff = income - (reported_income * (Constants.tax_rate / 100))
-
+        reportedIncome = player.reportedIncome
+        player.payoff = income - (reportedIncome * (Constants.tax_rate / 100))
 
     @staticmethod
     def js_vars(player: Player):
         return dict(
-            tax_rate=Constants.tax_rate / 100)
+            tax_rate=Constants.tax_rate / 100,
+            max_report=player.participant.earnings / (Constants.tax_rate / 100),
+            min_report=Constants.payoff_trial
+        )
 
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
             payoff_trial=Constants.payoff_trial,
-            corruption_level=player.corruption_level
+            corruption_level=player.corruption_level,
+            max_report=player.participant.earnings*100 / Constants.tax_rate,
+            red_high=Constants.corruptPO_high
         )
-
 
 class Takeweel(Page):
     @staticmethod
@@ -161,11 +168,18 @@ class Takeweel(Page):
 
 class Feedback_TP(Page):
     @staticmethod
+    def before_next_page(player, timeout_happened):
+        if player.payoff > Constants.payoff_trial:
+            player.payoff = player.payoff - Constants.payoff_trial
+        else:
+            player.payoff = cu(0)
+
+    @staticmethod
     def vars_for_template(player: Player):
         decision_PO = player.participant.embezzle
         payoff_task1 = player.participant.earnings
         payoff = player.payoff
-        paid_taxes = round(player.reported_income * (Constants.tax_rate / 100),2)
+        paid_taxes = round(player.reportedIncome * (Constants.tax_rate / 100), 2)
         return dict(
             decision_PO=decision_PO,
             payoff_task1=payoff_task1,

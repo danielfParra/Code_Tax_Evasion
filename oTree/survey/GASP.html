@@ -1,6 +1,14 @@
 {{ block title }}Survey{{ endblock }}
 {{ block content }}
 
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+
+
+
 <style>
 tr:nth-child(even) {background-color: #f9f9f9; width: 10%}
 th {
@@ -11,6 +19,8 @@ td {
     font-weight: normal;
 }
 </style>
+
+{{ endblock }}
 
     <p>
         In this questionnaire you will read about situations that people are likely to

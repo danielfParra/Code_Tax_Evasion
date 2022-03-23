@@ -4,16 +4,16 @@
         'outerRadius'    : 170,
         'segments'       :
         [
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#A8D0E6', 'text' : 'Do not take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'},
-           {'fillStyle' : '#F78888', 'text' : 'Take'}
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#A8D0E6', 'text' : 'Not Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'},
+           {'fillStyle' : '#F78888', 'text' : 'Taken'}
         ],
         'animation' :
         {
@@ -65,7 +65,6 @@
     function alertPrize(indicatedSegment)
     {
         // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
-        alert("You were matched with a Public Official who decided to take the money");
         document.getElementById("finish").style.display="block";
     }
 

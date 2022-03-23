@@ -15,6 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'survey'
     players_per_group = None
     num_rounds = 1
+    payoff_trial = cu(0.6)
 
 
 class Subsession(BaseSubsession):
@@ -27,7 +28,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Demographics
-    age = models.IntegerField(label='What is your age?', min=13, max=100)
+    age = models.IntegerField(label='What is your age?', min=18, max=100)
 
     gender = models.IntegerField(
         label='What is your gender?',
@@ -144,6 +145,5 @@ class GASP(Page):
                    'q6_GASP', 'q7_GASP', 'q8_GASP', 'q9_GASP', 'q10_GASP',
                    'q11_GASP', 'q12_GASP', 'q13_GASP', 'q14_GASP', 'q15_GASP', 'q16_GASP']
 
-page_sequence = [Demographics,
-                 GASP,
-                 ]
+
+page_sequence = [Demographics]

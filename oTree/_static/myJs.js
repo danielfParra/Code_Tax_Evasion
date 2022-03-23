@@ -1,6 +1,6 @@
 function show_text(id) {
-    id.style.display= 'block';
     id.style.transition = "opacity 1.6s";
+    id.style.display= 'block';
 };
 
 function hide(elemid) {

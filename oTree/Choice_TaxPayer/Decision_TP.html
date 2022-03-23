@@ -1,5 +1,5 @@
 {{ block title }}
-    Your decision
+    Taxes
 {{ endblock }}
 
 <link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
@@ -11,10 +11,37 @@
 
 <div class="card w-90">
   <div class="card-body">
-      <p> Recall: out of the 10 Players A, <strong><b>{{ Constants.corruptPO_high }}</b> decided to take the
-          {{ Constants.money_to_take }}</strong>, and <b>{{ Constants.no_corruptPO_high }}</b> decided not
-          to take it.
-</p>
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} decided
+         to take</span></strong> the {{Constants.money_to_take}},
+         and <strong><span class="no_take">{{Constants.no_corruptPO_high}} decided not to take it</span></strong>.
+         For illustration look at the picture below. In the picture, people in red decided to take and people in blue
+         decided not to take.
+     </p>
+
+        {{if red_high == 9}}
+
+        <img src="{{ static '9_red_1_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_high == 8}}
+
+        <img src="{{ static '8_red_2_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_high == 7}}
+
+        <img src="{{ static '7_red_3_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        <p>
+         After you have reported your income,
+         one participant out the 10 presented in the picture will be randomly
+         selected and matched with your group.
+
+        </p>
 
 {{else}}
 
@@ -27,25 +54,31 @@
 
 {{ endif }}
 
-    <h5 class="card-title">Move the slider to report your income.</h5>
+      <br>
+      <br>
 
+    <h4 class="card-title">Move the slider to report your income.</h4>
 
-      <input max="4" min="{{payoff_trial}}" name="reported_income" oninput="updateDescription(this)" step="0.01"
-             type="range" class="form-range">
+<input id="slider" type="range" name="reportedIncome" oninput="updateDescription(this)" step="0.01"
+class="form-range">
 
       <h5 id="description"></h5>
 <!-- by leaving the description blank initially, we prompt the user to move the slider,
 reducing the anchoring/default effect. -->
   </div>
+    <br>
 </div>
 
 <script>
     let description = document.getElementById('description');
     function updateDescription(input) {
-        let reported_income = parseFloat(input.value).toFixed(2);
-        let tax = parseFloat(js_vars.tax_rate*reported_income).toFixed(2);
-        description.innerText = `Your reported income: ${reported_income}. You would pay ${tax} on taxes. `
+        document.getElementById("slider").setAttribute("max", js_vars.max_report);
+        document.getElementById("slider").setAttribute("min", js_vars.min_report); //These lines set min and max of the slider
+        let reportedIncome = parseFloat(input.value).toFixed(2);
+        let tax = parseFloat(js_vars.tax_rate*reportedIncome).toFixed(2);
+        description.innerText = `Your reported income: ${reportedIncome}. You would pay ${tax} on taxes. `
     }
+
 </script>
 
 
@@ -53,6 +86,6 @@ reducing the anchoring/default effect. -->
 
 {{ next_button }}
 
-{{ formfield_errors 'reported_income' }}
+{{ formfield_errors 'reportedIncome' }}
 
 {{ endblock }}

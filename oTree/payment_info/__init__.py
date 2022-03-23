@@ -11,6 +11,7 @@ class Constants(BaseConstants):
     num_rounds = 1
 
     completion_fee = cu(1.1)
+    payoff_trial = cu(0.6)
 
 
 class Subsession(BaseSubsession):
@@ -32,11 +33,13 @@ class PaymentInfo(Page):
     def vars_for_template(player: Player):
         participant = player.participant
         payoff = player.participant.payoff
-        Prolific_fixed_payoff = Constants.completion_fee
+        Prolific_fixed_payoff = Constants.completion_fee + Constants.payoff_trial
+        trial_payoff = Constants.payoff_trial
         return dict(
             redemption_code=participant.label,
             Prolific_fixed_payoff=Prolific_fixed_payoff,
             payoff=payoff,
+            trial_payoff=trial_payoff,
         )
 
 

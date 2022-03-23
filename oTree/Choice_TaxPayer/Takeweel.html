@@ -1,6 +1,6 @@
 
 {{ block title }}
-   Learn the public official of your group.
+   Learn the Player A matched with your group.
 {{ endblock }}
 
 
@@ -27,14 +27,26 @@
 <script src="{% static 'TweenMax.min.js' %}"></script>
 
 <p>
-    To learn whether you are matched with a public official who decided to take the {{Constants.money_to_take}}
-    or with a public official who decided not to do so, <strong> click on "Spin the Wheel".</strong>
+    To learn whether you are matched with a Player A who decided to take the {{Constants.money_to_take}}
+    or with a Player A who decided not to do so, <strong> click on "Spin the Wheel".</strong>
 </p>
 
-<p> Recall: out of the 10 Players A, <strong><b>{{ Constants.corruptPO_high }}</b> decided to take the
-          {{ Constants.money_to_take }}</strong>, and <b>{{ Constants.no_corruptPO_high }}</b> decided not
-          to take it.
-</p>
+
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} decided
+         to take</span></strong> the {{Constants.money_to_take}},
+         and <strong><span class="no_take">{{Constants.no_corruptPO_high}} decided not to take it</span></strong>.
+     </p>
+
+<div id="finish" style="display: none" class="alert alert-warning" role="alert">
+        {{ if decision_PO }}
+  <h4>You were matched with a Player A who decided to take the money.</h4>
+  <h4>Click on next to continue. </h4>
+    {{else}}
+  <h4>You were matched with a Player A who decided not to take the money.</h4>
+  <h4>Click on next to continue. </h4>
+    {{endif}}
+</div>
+
 
     {{ if decision_PO }}
 
@@ -64,9 +76,7 @@
 
 {{ endif }}
 
-<div id="finish" style="display: none" class="alert alert-info" role="alert">
-  <h4>You have encrypted all the words of the practice round. Click on next to continue. </h4>
-</div>
+
 
 
 <div id="next" style="display: none">

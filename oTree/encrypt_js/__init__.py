@@ -19,8 +19,8 @@ class Constants(BaseConstants):
     seconds_per_period = 2*60
     trial_words = 1
 
-    payoff_trial = cu(0.3)
-    piece_rate = cu(0.05)
+    payoff_trial = cu(0.6)
+    piece_rate = cu(0.13)
 
 
 class Subsession(BaseSubsession):

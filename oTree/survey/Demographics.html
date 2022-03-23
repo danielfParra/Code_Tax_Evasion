@@ -1,6 +1,19 @@
 {{ block title }}Survey{{ endblock }}
 {{ block content }}
 
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+<style>
+    label{font-size:20px;
+    }
+
+</style>
+
+{{ endblock }}
+
+
     <p>
         Please answer the following questions.
     </p>

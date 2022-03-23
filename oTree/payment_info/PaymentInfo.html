@@ -5,6 +5,14 @@
 Thank you for participation in this study!
   {{ endblock }}
 
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+{{ endblock }}
+
+
   {{ block content }}
 
 <div class="card border-secondary mb-3">
@@ -18,7 +26,9 @@ Thank you for participation in this study!
     <p>
       For your participation in this study you will receive
       {{ Prolific_fixed_payoff }} on your Prolific account
-      <b>{{ participant.label }}</b>. Based on your decisions you will
+      <b>{{ participant.label }}</b> which include the completion fee of {{ Constants.completion_fee }}
+      and the {{ trial_payoff }} from the trial
+      part of the encryption task. Based on your decisions you will
       receive the additional {{ payoff }} in a form of a bonus after
       the end of the study. The latter might take some time, so we ask
       you to be patient.
