@@ -1,0 +1,123 @@
+{{ block title }}Instructions Part 1{{ endblock }}
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+<link href="{{ static 'myStyleButton.css' }}" rel="stylesheet"/>
+{{ endblock }}
+
+{{ block content }}
+
+<div class="card bg-light m-3">
+    <div class="card-body ">
+
+        <h3>
+        Encoding Task
+    </h3>
+
+    <p>
+    You will perform an encoding task. Specifically,
+    you will be given sequences of three random capital letters.
+    We will call the combination of these three letters a “Word”
+    for simplicity.
+    </p>
+
+        <p>
+        For illustrative purposes, consider the following screenshot
+    </p>
+
+      <p>
+        <input id="info_button2" type="button" value="&#xf178" onclick="button_click(info_button2, paragraph2);" />
+    </p>
+
+    <div id="paragraph2" class="hidden-paragraph">
+    <div class="card">
+        <img src="{{ static 'screenshot.PNG' }}"/>
+        <div class="card-body">
+        </div>
+        </div>
+
+ <p>
+     <br>
+
+     As you can see here, you will have to allocate a number to each
+     capital letter. The encoding code can be found in the table below
+     the corresponding letter. For each Word, the encoding table will
+     change.
+
+ </p>
+<p>
+    <input id="info_button3" type="button" value="&#xf178" onclick="button_click(info_button3, paragraph3);" />
+</p>
+
+    </div>
+
+  <div id="paragraph3" class="hidden-paragraph">
+<p></p>
+    <p>
+        In this example, the three capital letters: “E”, “T” and “K” have to be encoded.
+        The solution follows immediately from the encoding table:
+
+    <ul>
+        <li>The encryption code for “E” is 627 (already entered by the participant)</li>
+        <li>The encryption code for “T” is 784 (already entered by the participant)</li>
+        <li>The encryption code for “K” is 333 (not entered yet by the participant)</li>
+    </ul>
+   <p>
+    <input id="info_button4" type="button" value="&#xf178" onclick="button_click(info_button4, paragraph4);" />
+</p>
+  </div>
+
+    <div id="paragraph4" class="hidden-paragraph">
+    <p>
+      <strong>  You will have {{ minutes_task|to0 }} minutes to encode as many Words into numbers as possible.
+        Note that each letter must be encoded correctly to continue to the next Word.
+        You will be paid {{ Constants.piece_rate }} for each correct Word.</strong>
+    </p>
+    <p>
+        After completing all the letters of a Word, click on submit.
+        If the three letter codes are correct, a new Word and a new encoding table will appear.
+        Otherwise, you will see an alert informing you that you have made one or more mistakes
+        in your encoding.
+    </p>
+    <p>
+        You will have to check and correct the codes until the Word is correct.
+    </p>
+
+    <p>
+    <input id="info_button5" type="button" value="&#xf178" onclick="buttonAppear(); button_click(info_button5, paragraph5);" />
+    </p>
+    </div>
+
+    <div id="paragraph5" class="hidden-paragraph">
+
+    <p>
+        Each new encoding table is randomly generated in two steps:
+    </p>
+        <ol>
+    <li> The computer program randomly selects a new set of three-digit
+        numbers to be used to encode the capital letters.</li>
+    <li>
+        Additionally, the computer program shuffles the position
+        of the capital letters in the table. Please note that the program always uses
+        all 26 capital letters of the alphabet. </li>
+</ol>
+    </div>
+    </div>
+    </div>
+
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
+
+{{ endblock }}
+
+{% block scripts %}
+
+<!-- Load the custom javascript functions -->
+
+
+<script src="{% static 'myJs.js' %}"></script>
+<script src="https://kit.fontawesome.com/46026ecfac.js" crossOrigin="anonymous"></script>
+
+{% endblock %}

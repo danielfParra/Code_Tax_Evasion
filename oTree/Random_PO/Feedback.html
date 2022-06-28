@@ -1,0 +1,60 @@
+{{ block title }}
+
+{{ endblock }}
+
+
+ <style>
+      p {
+        font-size:20px;
+      }
+      .payoff {
+        color: #0b5ed7;
+        font-weight:bold;
+      }
+      p.blocktext{
+    text-align: center;
+      }
+
+      hr {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border:2px solid;
+        border-radius: 5px;
+}
+    }
+ </style>
+
+{{ block content }}
+
+{{if decision}}
+<div class="card border-dark mb-3">
+  <div class="card-body">
+    <p class="card-text"> <h5>Your final earnings are the following</h5></p>
+
+        <p class="blocktext"> Your earnings in Part 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
+    <p class="blocktext">  Your earnings in Part 2  = <span class="payoff">{{Constants.money_to_take}}</span></p>
+        <hr>
+      <p class="blocktext"> <strong>Final earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
+
+</div></div>
+      <br>
+
+{{else}}
+<div class="card border-dark mb-3">
+  <div class="card-body">
+    <p class="card-text"> <h5>Your final earnings are the following</h5></p>
+
+    <p class="blocktext"> Your earnings in Part 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
+    <p class="blocktext">  Your earnings in Part 2 = <span class="payoff"> 0</span></p>
+        <hr>
+      <p class="blocktext"> <strong>Final earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
+  </div></div>
+<br>
+
+{{ endif }}
+
+    {{ next_button }}
+{{ endblock }}
+
+

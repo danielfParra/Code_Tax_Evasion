@@ -32,6 +32,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     embezzle = models.BooleanField()
+    CHOICE = models.BooleanField()
 
     q1PO = models.IntegerField(
         choices=[
@@ -54,7 +55,7 @@ class Player(BasePlayer):
     q3PO = models.IntegerField(
         choices=[
             [1, 'Your decision affects Players B\'s earnings'],
-            [2, 'You performed a encoding task in Part 1.'],
+            [2, 'You performed an encoding task in Part 1.'],
             [3, 'The {} that you can take come from the collected taxes that '
                 'Players B pay for sure.'.format(Constants.money_to_take)],
         ],
@@ -70,7 +71,7 @@ def q1PO_error_message(player, value):
 def q2PO_error_message(player, value):
     print('value is', value)
     if value != 1:
-      return 'Recall: If you decide not to take your will not receive any additional payment.'
+      return 'Recall: If you decide not to take, you will not receive any additional payment.'
 
 def q3PO_error_message(player, value):
     print('value is', value)
@@ -106,12 +107,21 @@ class Decision(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
+        player.CHOICE = 1
         income = player.participant.earnings
         embezzle = player.embezzle
         player.payoff = income + (embezzle * Constants.money_to_take)
 
 
 class Feedback(Page):
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        if player.payoff > Constants.payoff_trial:
+            player.payoff = player.payoff - Constants.payoff_trial
+        else:
+            player.payoff = cu(0)
+        player.participant.CHOICE = player.CHOICE
+
     @staticmethod
     def vars_for_template(player: Player):
         decision = player.embezzle

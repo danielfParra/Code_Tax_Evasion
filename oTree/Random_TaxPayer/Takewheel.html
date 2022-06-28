@@ -1,0 +1,130 @@
+
+{{ block title }}
+   Learn the Player A matched with your group.
+{{ endblock }}
+
+
+  {{ block content }}
+  <style>
+  canvas.tutCanvas, div.tutCanvas {
+    border: 1px solid #cccccc;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 5px;
+
+}  </style>
+
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+<!--
+<script>
+    $(window).bind('beforeunload',function() {
+    return "'Are you sure you want to leave the page? All data will be lost!";
+});
+</script>
+-->
+
+<script src="{% static 'Winwheel.js' %}"></script>
+<script src="{% static 'TweenMax.min.js' %}"></script>
+
+<p>
+    To learn whether you are matched with a Player A who has won the {{Constants.money_to_take}}
+    or with a Player A who has not won, <strong> click on "Spin the Wheel".</strong>
+</p>
+
+{{ if corruption_level }}
+
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} have won</span></strong>
+      the {{Constants.money_to_take}},
+         and <strong><span class="no_take">{{Constants.no_corruptPO_high}} has not won it</span></strong>.
+     </p>
+
+{{ else }}
+
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_low}} have won
+         </span></strong> the {{Constants.money_to_take}},
+         and <strong><span class="no_take">{{Constants.no_corruptPO_low}} have not won it</span></strong>.
+     </p>
+
+{{ endif }}
+
+
+<div id="finish" style="display: none" class="alert alert-warning" role="alert">
+    {{ if decision_PO }}
+  <h4>You were matched with a Player A who has won the money.</h4>
+  <h4>Click on next to continue. </h4>
+    {{else}}
+  <h4>You were matched with a Player A who has not won the money.</h4>
+  <h4>Click on next to continue. </h4>
+    {{endif}}
+</div>
+
+{{ if corruption_level }}
+
+    {{ if decision_PO }}
+
+    <table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_Random_take_highcorruption.js' }}"></script>
+
+{{ else }}
+
+    <table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_Random_Notake_highcorruption.js' }}"></script>
+
+{{ endif }}
+
+{{ else }}
+
+    {{ if decision_PO }}
+
+    <table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_Random_take_lowcorruption.js' }}"></script>
+
+{{ else }}
+
+    <table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_Random_Notake_lowcorruption.js' }}"></script>
+
+{{ endif }}
+{{ endif }}
+
+
+
+
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
+
+{{ endblock }}
+

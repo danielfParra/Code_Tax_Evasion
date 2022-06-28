@@ -1,0 +1,80 @@
+
+{{ block title }}
+   Lottery
+{{ endblock }}
+
+
+  {{ block content }}
+  <style>
+  canvas.tutCanvas, div.tutCanvas {
+    border: 1px solid #cccccc;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 5px;
+
+}  </style>
+
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+<!--
+<script>
+    $(window).bind('beforeunload',function() {
+    return "'Are you sure you want to leave the page? All data will be lost!";
+});
+</script>
+-->
+
+<script src="{% static 'Winwheel.js' %}"></script>
+<script src="{% static 'TweenMax.min.js' %}"></script>
+
+<p>
+    To learn whether you win or not the prize of {{Constants.money_to_take}}
+    <strong> click on "Spin the Wheel".</strong>
+</p>
+
+<div id="finish" style="display: none" class="alert alert-warning" role="alert">
+    {{ if embezzle }}
+  <h4>You have won the {{Constants.money_to_take}}!</h4>
+  <h4>Click on next to continue. </h4>
+    {{else}}
+  <h4>You have not won the {{Constants.money_to_take}}!</h4>
+  <h4>Click on next to continue. </h4>
+    {{endif}}
+</div>
+
+
+
+    {{ if embezzle }}
+
+<table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_PO_take.js' }}"></script>
+
+{{ else }}
+
+    <table width="100%">
+        <tbody><tr>
+            <td><canvas id="canvas" class="tutCanvas" width="400" height="400">Canvas not supported. Please use Google Chrome or Mozilla Firefox.</canvas></td>
+            <td width="50%">
+<button type="button" id="spinButton" class="btn btn-warning btn-lg" onclick="calculatePrize(); this.disabled=true; buttonAppear(); ">Spin the Wheel</button>
+            </td>
+        </tr>
+    </tbody></table>
+
+<script src="{{static 'weel_PO_Notake.js' }}"></script>
+
+{{ endif }}
+
+
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
+
+{{ endblock }}
+

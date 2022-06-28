@@ -1,0 +1,66 @@
+{{ extends "otree/Page.html" }}
+{{ load otree }}
+
+  {{ block title }}
+Thank you for participating in this study!
+{{ endblock }}
+
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+{{ endblock }}
+
+
+  {{ block content }}
+
+<div class="card border-secondary mb-3">
+  <div class="card-header">
+    <h5>Payment</h5>
+  </div>
+  <div class="card-body"
+       title="In case something went wrong, please make a screenshot and contact us via Prolific.">
+<p>
+      For your participation in this study, you will receive
+      {{ Prolific_fixed_payoff }} on your Prolific account
+      <b>{{ participant.label }}</b> which include the completion fee of {{ Constants.completion_fee }}
+      and the {{ trial_payoff }} from the practice round of the encryption task.
+      </p>
+    <p>
+      Based on your decisions you will
+      receive the additional {{ payoff }} in a form of a bonus after
+      the end of the study. The bonus payment might take a few more hours to reach you,
+      so we ask you to be patient.
+    </p>
+    <p>
+      Additionally you may earn a bonus payment from part 2 of the survey.
+      To determine your bonus payment, we need to collect all participants' responses
+      to calculate the prize. We will send a message to all participants indicating
+      what the most selected response for this situation was, along with the payment, if any.
+    </p>
+
+<div class="card border-secondary mb-3">
+  <div class="card-header">
+    <h5>Contact</h5>
+  </div>
+  <div class="card-body">
+    <p>
+      For further questions please contact us under
+      <a href="mailto:prolificstudy@wzb.eu?subject=WZB%20Prolific%20study">
+        prolificstudy@wzb.eu</a>.
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="btn-group float-right">
+        <div class="pl-3">{{ next_button }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  {{ endblock }}

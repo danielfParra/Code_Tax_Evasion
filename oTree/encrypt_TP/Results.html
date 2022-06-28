@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results Part 1: Encoding Task
+{% endblock %}
+
+ <style>
+      p {
+        font-size:20px;
+      }
+      .payoff {
+        color: #0b5ed7;
+        font-weight:bold;
+      }
+      p.blocktext{
+    text-align: center;
+      }
+
+      hr {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border:2px solid;
+        border-radius: 5px;
+}
+    }
+ </style>
+
+{% block content %}
+
+<div class="card border-dark mb-3">
+
+  <div class="card-body">
+      <p> You encoded <span class="payoff"><strong>{{ player.performance }}</strong></span> Words correctly.
+          Then, your earnings in this part are the following:</p>
+
+      <p class="blocktext"> Practice round = <span class="payoff">{{trial_payoff}}</span>.</p>
+      <p class="blocktext"> {{ minutes_task|to0 }} minutes task = <span class="payoff">{{task_payoff}}</span>.</p>
+
+      <hr>
+      <p class="blocktext"> <strong>Total earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
+
+      <br>
+ </div>
+
+</div>
+<br>
+   <p>
+    <i>Please make sure you'll remember your total earnings from Part 1,
+        you'll may need this value in Part 2.</i>
+    </p>
+<br>
+    {{ next_button }}
+
+{% endblock %}

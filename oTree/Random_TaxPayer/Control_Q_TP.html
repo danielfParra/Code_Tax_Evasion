@@ -1,0 +1,82 @@
+{{ block title }}
+Comprehension questions
+{{ endblock }}
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+
+<style>
+ .callout {
+  padding: 20px;
+  margin: 20px 0;
+  font-size: 20px;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  border-left-color: #f0ad4e;
+  h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  code {
+    border-radius: 3px;
+  }
+  & + .bs-callout {
+    margin-top: -5px;
+  }
+}
+@each $name,$color in (default,#777),(primary,#428bca),(success,#5cb85c),(danger,#d9534f),(warning,#f0ad4e),(info,#5bc0de), (bdc,#29527a) {
+  .callout-#{$name} {
+    border-left-color: $color;
+    h4 {
+      color: $color;
+    }
+  }
+}
+  .col-form-label {
+  font-size: 18px;}
+
+ .form-check{
+  font-size: 18px;
+ }
+  .form-control-errors{
+   font-size: 18px;
+ }
+
+</style>
+
+{{ endblock }}
+
+{{ block content }}
+
+
+<div class="card border-warning m-3">
+    <div class="card-body">
+
+{{ formfield  'q1TP' label="1. Imagine a situation where you report an income from Part 1 of &#163;1. How much would you pay in taxes?" }}
+
+{{ formfield  'q2TP' label="2. Who knows what your actual income is?" }}
+
+{{ formfield  'q3TP' label="3. Which of the following statements is <em><u>false</u></em>?" }}
+
+{{ formfield  'q4TP' label="4. Could Participant A choose not to participate in the lottery?" }}
+    </div></div>
+
+<br>
+<p>
+<i>Once you have answered all the questions correctly, you can continue.</i>
+</p>
+
+<p>
+<div class="callout callout-primary">
+Please note that the experiment does not contain any further comprehension
+    questions or attention checks from this point on!</div>
+
+{{ next_button }}
+
+{{ endblock }}

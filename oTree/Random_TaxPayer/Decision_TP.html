@@ -1,0 +1,114 @@
+{{ block title }}
+    Taxes
+{{ endblock }}
+
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+
+{{ block content }}
+
+{{if corruption_level}}
+
+<div class="card w-90">
+  <div class="card-body">
+
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} have won
+         </span></strong> the {{Constants.money_to_take}} from the lottery,
+         and <strong><span class="no_take">{{Constants.no_corruptPO_high}} has not won it</span></strong>.
+         For illustrative purposes, have a look at the picture below.
+         In the picture, people in red have won the {{Constants.money_to_take}}
+         and the people in blue have not won the {{Constants.money_to_take}}.
+  </p>
+
+        {{if red_high == 9}}
+
+        <img src="{{ static '9_red_1_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_high == 8}}
+
+        <img src="{{ static '8_red_2_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_high == 7}}
+
+        <img src="{{ static '7_red_3_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+{{else}}
+
+<div class="card w-90">
+  <div class="card-body">
+
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_low}} have won
+         </span></strong> the {{Constants.money_to_take}} from the lottery,
+         and <strong><span class="no_take">{{Constants.no_corruptPO_low}} has not won it</span></strong>.
+         For illustrative purposes, have a look at the picture below.
+         In the picture, people in red have won the {{Constants.money_to_take}}
+         and the people in blue have not won the {{Constants.money_to_take}}.
+  </p>
+
+      {{if red_low == 1}}
+
+        <img src="{{ static '1_red_9_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_low == 2}}
+
+        <img src="{{ static '2_red_8_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_low == 3}}
+
+        <img src="{{ static '3_red_7_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+
+{{ endif }}
+
+      <p>
+          Now you have to report an income figure. At a minimum, your report should be {{Constants.payoff_trial}}.
+          After you have reported this income, one Participant A out
+          the 10 presented in the picture will be randomly selected and matched with your group.
+
+      </p>
+      <br>
+
+    <h4 class="card-title">Move the slider to report the income.</h4>
+
+<input id="slider" value="0.6" type="range" name="reportedIncome" oninput="updateDescription(this)" step="0.01"
+class="form-range">
+
+      <h5 id="description"></h5>
+<!-- by leaving the description blank initially, we prompt the user to move the slider,
+reducing the anchoring/default effect. -->
+  </div>
+    <br>
+</div>
+
+<script>
+    let description = document.getElementById('description');
+    function updateDescription(input) {
+        document.getElementById("slider").setAttribute("max", js_vars.max_report);
+        document.getElementById("slider").setAttribute("min", js_vars.min_report); //These lines set min and max of the slider
+        let reportedIncome = parseFloat(input.value).toFixed(2);
+        let tax = parseFloat(js_vars.tax_rate*reportedIncome).toFixed(2);
+        description.innerText = `Your reported income: ${reportedIncome}. You would pay ${tax} in taxes. `
+    }
+
+</script>
+
+
+<br>
+
+{{ next_button }}
+
+{{ formfield_errors 'reportedIncome' }}
+
+{{ endblock }}

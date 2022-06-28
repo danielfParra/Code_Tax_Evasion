@@ -11,11 +11,12 @@
 
 <div class="card w-90">
   <div class="card-body">
-  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} decided
-         to take</span></strong> the {{Constants.money_to_take}},
-         and <strong><span class="no_take">{{Constants.no_corruptPO_high}} decided not to take it</span></strong>.
-         For illustration look at the picture below. In the picture, people in red decided to take and people in blue
-         decided not to take.
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} have decided
+      to take</span></strong> the {{Constants.money_to_take}},
+      and <strong><span class="no_take">{{Constants.no_corruptPO_high}} has decided not to take it</span></strong>.
+      For illustrative purposes, take a look at the picture below. In the picture,
+      people in red have decided to take the money and the people in blue have decided
+      not to take the money.
      </p>
 
         {{if red_high == 9}}
@@ -36,30 +37,49 @@
 
         {{endif}}
 
-        <p>
-         After you have reported your income,
-         one participant out the 10 presented in the picture will be randomly
-         selected and matched with your group.
-
-        </p>
-
 {{else}}
 
 <div class="card w-90">
   <div class="card-body">
-      <p> Recall: out of the 10 Players A, <strong><b>{{ Constants.corruptPO_low}}</b> decided to take the
-          {{ Constants.money_to_take }}</strong>, and <b>{{ Constants.no_corruptPO_low }}</b> decided not
-          to take it.
-</p>
+  <p> Recall: Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_low}} have decided
+         to take</span></strong> the {{Constants.money_to_take}},
+         and <strong><span class="no_take">{{Constants.no_corruptPO_low}} have decided not to take it</span></strong>.
+         For illustrative purposes, take a look at the picture below. In the picture, people in red have
+      decided to take the money and the people in blue have decided not to take the money.
+     </p>
+
+      {{if red_low == 1}}
+
+        <img src="{{ static '1_red_9_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_low == 2}}
+
+        <img src="{{ static '2_red_8_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_low == 3}}
+
+        <img src="{{ static '3_red_7_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
 
 {{ endif }}
 
-      <br>
+      <p>
+          Now you have to report an income figure. At a minimum, your report should be {{Constants.payoff_trial}}.
+          After you have reported this income, one Participant A out
+          the 10 presented in the picture will be randomly selected and matched with your group.
+
+      </p>
       <br>
 
-    <h4 class="card-title">Move the slider to report your income.</h4>
+    <h4 class="card-title">Move the slider to report the income.</h4>
 
-<input id="slider" type="range" name="reportedIncome" oninput="updateDescription(this)" step="0.01"
+<input id="slider" value="0.6" type="range" name="reportedIncome" oninput="updateDescription(this)" step="0.01"
 class="form-range">
 
       <h5 id="description"></h5>
@@ -76,7 +96,7 @@ reducing the anchoring/default effect. -->
         document.getElementById("slider").setAttribute("min", js_vars.min_report); //These lines set min and max of the slider
         let reportedIncome = parseFloat(input.value).toFixed(2);
         let tax = parseFloat(js_vars.tax_rate*reportedIncome).toFixed(2);
-        description.innerText = `Your reported income: ${reportedIncome}. You would pay ${tax} on taxes. `
+        description.innerText = `Your reported income: ${reportedIncome}. You would pay ${tax} in taxes. `
     }
 
 </script>

@@ -1,0 +1,67 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% endblock %}
+
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+<style>
+h3 {text-align: center;}
+</style>
+
+{% block content %}
+
+
+<div class="card bg-light m-3" xmlns="http://www.w3.org/1999/html">
+    <div class="card-body">
+
+
+    <p>
+<h3>Welcome to our study!</h3>
+    </p>
+
+    <p>
+        Thank you for taking part in this study.
+    </p>
+    <p>
+        Please read the instructions carefully.
+    </p>
+    <p>
+        You will be paid a flat fee of <b>{{ Constants.completion_fee }}</b> for completing
+        this study and filling in a final questionnaire.
+    </p>
+    <p>
+        During the experiment, you will be able to earn additional money (minimum {{Constants.payoff_trial}}) depending on the
+        decisions you make. <strong> The decisions you make during the game will not be shared with
+        Prolific at any time.</strong>
+    </p>
+
+    <p>
+        The study consists of two different parts. You will be paid for both parts.
+        At the end, you need to fill in a questionnaire to complete the experiment.
+    </p>
+
+    <p>
+        Instructions for each part will be provided as you go along.
+        Please read all instructions carefully, answer the comprehension
+        questions and do the associated task.
+    </p>
+
+    <p>
+    <strong>It is important that you complete this study without any interruptions.
+        Please do not close this window or leave this webpage in any other way.
+    </strong>
+    </p>
+
+
+    <p>
+        If something goes wrong, please take a screenshot and contact us via Prolific.
+    </p>
+    </div></div>
+
+    {% next_button %}
+{% endblock %}
+
+

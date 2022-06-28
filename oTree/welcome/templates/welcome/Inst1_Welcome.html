@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Welcome to our study!
+    </p>
+    <p>
+        Please read the instructions carefully.
+    </p>
+    <p>
+    You will receive {{ Constants.completion_fee }} after you complete the experiment
+        and fill in a final questionnaire.
+    </p>
+    <p>
+        During the experiment, you will be able to earn additional money depending on the decisions you make.
+        The decisions you make during the game will not be shared with Prolific at any time.
+        We will explain how the game works on the next screen.
+    </p>
+
+    <p>
+        If something goes wrong, please make a screenshot and contact us via Prolific.
+    </p>
+
+
+    {% next_button %}
+{% endblock %}
+
+

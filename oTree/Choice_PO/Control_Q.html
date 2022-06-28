@@ -1,11 +1,9 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
-
-{% block title %}
+{{ block title }}
 Comprehension questions
-{% endblock %}
+{{ endblock }}
 
-{% block content %}
 {{ block styles }}
 <!-- Load the custom css styles -->
 <link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
@@ -14,6 +12,7 @@ Comprehension questions
 <style>
  .callout {
   padding: 20px;
+  font-size: 20px;
   margin: 20px 0;
   border: 1px solid #eee;
   border-left-width: 5px;
@@ -41,11 +40,21 @@ Comprehension questions
     }
   }
 }
+ .col-form-label {
+  font-size: 18px;}
+
+ .form-check{
+  font-size: 18px;
+ }
+ .form-control-errors{
+   font-size: 18px;
+ }
+
 </style>
 
 {{ endblock }}
 
-
+{{ block content }}
 <div class="card border-warning m-3">
     <div class="card-body">
 
@@ -66,6 +75,6 @@ Comprehension questions
 Please note that the experiment does not contain any further comprehension
     questions or attention checks from this point on!</div>
 
-{% next_button %}
+{{ next_button }}
 
-{% endblock %}
+{{ endblock }}

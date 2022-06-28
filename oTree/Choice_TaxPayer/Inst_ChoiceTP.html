@@ -17,8 +17,8 @@ Instructions Part 2
     <div class="card-body">
 
     <p>
-        You have being assigned to the role of <strong>Player B</strong> and you are part of a group of 3
-        participants (including you). The 3 members of your group are all <strong>Players B</strong>.
+        You have been assigned to the role of <strong>Player B</strong> and you are part of a group of 3
+        participants (including yourself). The 3 members of your group are all <strong>Players B</strong>.
     </p>
 
     <p>
@@ -28,8 +28,11 @@ Instructions Part 2
         <div id="paragraph1" class="hidden-paragraph">
     <p> All members of your group participated in Part 1 and earned an income from it.</p>
 
-    <p> You are now asked to report the income you earned in Part 1, to calculate your final
-        earnings. <strong>The income that you report will be taxed at the rate of {{Constants.tax_rate}}%</strong>.
+    <p> We now ask you to report the income you earned in Part 1.
+        At a minimum, your report should be the {{ Constants.payoff_trial }}
+        you earned in the practice round.
+        <strong>The income that you report will be taxed
+         at the rate of {{Constants.tax_rate}}%</strong>.
     </p>
 
     <p>
@@ -40,8 +43,10 @@ Instructions Part 2
 
         <div id="paragraph2" class="hidden-paragraph">
 
-    <p> The other Players B in your group are also asked to report their incomes for taxation. Your income
-    report, as well as the income report of the other players in your group, is completely private.
+    <p> The other Players B in your group will also be asked to report
+        their incomes for taxation purposes.
+        Your income report, as well as the income reports of the
+        other players in your group, is completely private.
         <strong>You won't know their income report, and they won't know yours</strong>.
 
      <p>
@@ -49,8 +54,8 @@ Instructions Part 2
     <p>
          Taxes collected will be <strong>doubled</strong> and given to the organisation
          <strong>Keep Britain Tidy</strong> at the end of this study.
-         The money will be used to support its actions of reducing litter, improving local places,
-         and preventing waste.
+         The money will be used to support its activities to reduce litter,
+         improve local places, and prevent waste.
      </p>
 
     <p>
@@ -60,14 +65,17 @@ Instructions Part 2
 
             <div id="paragraph3" class="hidden-paragraph">
 
-    <p> Your group is going to be randomly matched with <strong>1 Player A out of 10 Players A</strong>. The
-    10 Players A already decided whether to take {{Constants.money_to_take}} from the collected taxes of the
+    <p> Your group is going to be randomly matched with <strong>1 Player A out of 10 Players A</strong>. In a previous study,
+        the 10 Players A have already individually decided whether to  take {{Constants.money_to_take}}
+        from the collected taxes of the
     group of Players B they are going to be matched with.
         </p>
 
-    <p> They could take the {{Constants.money_to_take}} from the collected taxes before being doubled
-        and transferred to Keep Britain Tidy. These {{Constants.money_to_take}} points correspond to the
-        collected taxes coming from the group of Players B's earnings in the practice round in Part 1.
+    <p> They could take the {{Constants.money_to_take}} from the collected
+        taxes before these are doubled and donated to Keep Britain Tidy.
+        These {{Constants.money_to_take}} corresponds to the taxes paid
+        by your group members from their earnings in the practice
+        round in Part 1.
     </p>
 
         <p>
@@ -76,11 +84,14 @@ Instructions Part 2
             </div>
     <div id="paragraph4" class="hidden-paragraph">
 
-     <p> Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} decided
+        {{if corruption_level}}
+
+     <p> Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_high}} have decided
          to take</span></strong> the {{Constants.money_to_take}},
-         and <strong><span class="no_take">{{Constants.no_corruptPO_high}} decided not to take it</span></strong>.
-         For illustration look at the picture below. In the picture, people in red decided to take and people in blue
-         decided not to take.
+         and <strong><span class="no_take">{{Constants.no_corruptPO_high}} has decided not to take it</span></strong>.
+         For illustrative purposes, have a look at the picture below.
+         In the picture, people in red have decided to take the {{Constants.money_to_take}}
+         and the people in blue have decided not to take the {{Constants.money_to_take}}.
      </p>
 
         {{if red_high == 9}}
@@ -101,11 +112,43 @@ Instructions Part 2
 
         {{endif}}
 
+
+        {{else}}
+
+        <p> Out of the 10 Players A, <strong><span class="take"> {{Constants.corruptPO_low}} have decided
+         to take</span></strong> the {{Constants.money_to_take}},
+         and <strong><span class="no_take">{{Constants.no_corruptPO_low}} have decided not to take it</span></strong>.
+         For illustrative purposes, have a look at the picture below.
+         In the picture, people in red have decided to take the {{Constants.money_to_take}}
+         and the people in blue have decided not to take the {{Constants.money_to_take}}.
+     </p>
+
+        {{if red_low == 1}}
+
+        <img src="{{ static '1_red_9_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_low == 2}}
+
+        <img src="{{ static '2_red_8_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+        {{if red_low == 3}}
+
+        <img src="{{ static '3_red_7_blue.png' }}" width="50%" class="center">
+
+        {{endif}}
+
+          {{endif}}
+
         <p>
-         One participant out the 10 presented in the picture will be randomly selected and matched with your group.
-         After you have reported your earnings in part 1, you will learn whether your group is matched with a
-            <strong><span class="take"> Participant A who decided to take the money</span></strong> or a
-            <strong><span class="no_take"> Participant A decided not to take it</span></strong>.
+         One Participant A of the 10 presented in the picture will be randomly selected
+         and matched with your group. After you have reported your earnings from part 1,
+         you will learn whether your group has been matched with a
+         <strong><span class="take"> Participant A who has decided to take the money</span></strong> or a
+         <strong><span class="no_take"> Participant A who has decided not to take it</span></strong>.
         </p>
 
             <p>
@@ -114,9 +157,9 @@ Instructions Part 2
     </div>
 
     <div id="paragraph5" class="hidden-paragraph">
-        <p> Your income-report decision, which ever it is, <strong>does not affect Player A's earnings</strong>.
-            And your earnings are not affected by the decision, which ever it is, of the Player A you are going to
-            be randomly matched with.
+        <p> Your income-report decision, what ever it is, <strong>will not affect Player A's earnings</strong>.
+            And your earnings will not be affected by the decision made by the Player A who you are randomly
+            matched with.
         </p>
 
 
@@ -125,7 +168,7 @@ Instructions Part 2
    <h4> What will your final earnings be?</h4>
   </div>
   <div class="card-body">
-      <p class="blocktext"> Your earnings  = <span class="payoff"> Your income - (the income that you report &times; {{Constants.tax_rate}}%)</span></p>
+      <p class="blocktext"> Your earnings  = <span class="payoff"> Your income - (the income you report &times; {{Constants.tax_rate}}%)</span></p>
 <br>
 
   </div>

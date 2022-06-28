@@ -5,7 +5,7 @@ c = Currency  # old name for currency; you can delete this.
 
 def make_field(label):
     return models.IntegerField(
-        choices=[1, 2, 3, 4, 5, 6, 7],
+        choices=[1, 2, 3, 4],
         label=label,
         widget=widgets.RadioSelect,
     )
@@ -16,6 +16,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     payoff_trial = cu(0.6)
+    money_to_take = cu(0.63)
 
 
 class Subsession(BaseSubsession):
@@ -55,7 +56,7 @@ class Player(BasePlayer):
     )
 
     reasoning = models.LongStringField(
-        label='Please give a concise explanation of how you took your decisions in the experiment',
+        label='Please give a concise explanation of how you made your decisions in the experiment',
         blank=True
     )
 
@@ -85,49 +86,69 @@ class Player(BasePlayer):
         label='What is your religious affiliation (If any)?'
     )
 
-    q1_GASP = make_field('After realizing you have received too much change at a store, you decide to keep it because '
-                         'the salesclerk doesn\'t notice. What is the likelihood that you would feel uncomfortable '
-                         'about keeping the money?')
-    q2_GASP = make_field('You are privately informed that you are the only one in your group that did not make the '
-                         'honor society because you skipped too many days of school. What is the likelihood that this '
-                         'would lead you to become more responsible about attending school?')
-    q3_GASP = make_field('You rip an article out of a journal in the library and take it with you. Your teacher '
-                         'discovers what you did and tells the librarian and your entire class. What is the '
-                         'likelihood that this would make you would feel like a bad person?')
-    q4_GASP = make_field('After making a big mistake on an important project at work in which people were depending '
-                         'on you, your boss criticizes you in front of your coworkers. What is the likelihood that '
-                         'you would feign sickness and leave work?')
-    q5_GASP = make_field('You reveal a friend’s secret, though your friend never finds out. What is the likelihood '
-                         'that your failure to keep the secret would lead you to exert extra effort to keep secrets '
-                         'in the future?')
-    q6_GASP = make_field('You give a bad presentation at work. Afterwards your boss tells your coworkers it was your '
-                         'fault that your company lost the contract. What is the likelihood that you would feel '
-                         'incompetent?')
-    q7_GASP = make_field('A friend tells you that you boast a great deal. What is the likelihood that you would stop '
-                         'spending time with that friend?')
-    q8_GASP = make_field('Your home is very messy and unexpected guests knock on your door and invite themselves in. '
-                         'What is the likelihood that you would avoid the guests until they leave?')
-    q9_GASP = make_field('You secretly commit a felony. What is the likelihood that you would feel remorse about '
-                         'breaking the law?')
-    q10_GASP = make_field('You successfully exaggerate your damages in a lawsuit. Months later, your lies are '
-                          'discovered and you are charged with perjury. What is the likelihood that you would think '
-                          'you are a despicable human being?')
-    q11_GASP = make_field('You strongly defend a point of view in a discussion, and though nobody was aware of it, '
-                          'you realize that you were wrong. What is the likelihood that this would make you think '
-                          'more carefully before you speak?')
-    q12_GASP = make_field('You take office supplies home for personal use and are caught by your boss. What is the '
-                          'likelihood that this would lead you to quit your job?')
-    q13_GASP = make_field('You make a mistake at work and find out a coworker is blamed for the error. Later, '
-                          'your coworker confronts you about your mistake. What is the likelihood that you would feel'
-                          ' like a coward?')
-    q14_GASP = make_field('At a coworker’s housewarming party, you spill red wine on their new creamcolored carpet. '
-                          'You cover the stain with a chair so that nobody notices your mess. What is the likelihood '
-                          'that you would feel that the way you acted was pathetic?')
-    q15_GASP = make_field('While discussing a heated subject with friends, you suddenly realize you are shouting '
-                          'though nobody seems to notice. What is the likelihood that you would try to act more '
-                          'considerately toward your friends?')
-    q16_GASP = make_field('You lie to people but they never find out about it. What is the likelihood that you would '
-                          'feel terrible about the lies you told?')
+    # q1_GASP = make_field('After realizing you have received too much change at a store, you decide to keep it because '
+    #                      'the salesclerk doesn\'t notice. What is the likelihood that you would feel uncomfortable '
+    #                      'about keeping the money?')
+    # q2_GASP = make_field('You are privately informed that you are the only one in your group that did not make the '
+    #                      'honor society because you skipped too many days of school. What is the likelihood that this '
+    #                      'would lead you to become more responsible about attending school?')
+    # q3_GASP = make_field('You rip an article out of a journal in the library and take it with you. Your teacher '
+    #                      'discovers what you did and tells the librarian and your entire class. What is the '
+    #                      'likelihood that this would make you would feel like a bad person?')
+    # q4_GASP = make_field('After making a big mistake on an important project at work in which people were depending '
+    #                      'on you, your boss criticizes you in front of your coworkers. What is the likelihood that '
+    #                      'you would feign sickness and leave work?')
+    # q5_GASP = make_field('You reveal a friend’s secret, though your friend never finds out. What is the likelihood '
+    #                      'that your failure to keep the secret would lead you to exert extra effort to keep secrets '
+    #                      'in the future?')
+    # q6_GASP = make_field('You give a bad presentation at work. Afterwards your boss tells your coworkers it was your '
+    #                      'fault that your company lost the contract. What is the likelihood that you would feel '
+    #                      'incompetent?')
+    # q7_GASP = make_field('A friend tells you that you boast a great deal. What is the likelihood that you would stop '
+    #                      'spending time with that friend?')
+    # q8_GASP = make_field('Your home is very messy and unexpected guests knock on your door and invite themselves in. '
+    #                      'What is the likelihood that you would avoid the guests until they leave?')
+    # q9_GASP = make_field('You secretly commit a felony. What is the likelihood that you would feel remorse about '
+    #                      'breaking the law?')
+    # q10_GASP = make_field('You successfully exaggerate your damages in a lawsuit. Months later, your lies are '
+    #                       'discovered and you are charged with perjury. What is the likelihood that you would think '
+    #                       'you are a despicable human being?')
+    # q11_GASP = make_field('You strongly defend a point of view in a discussion, and though nobody was aware of it, '
+    #                       'you realize that you were wrong. What is the likelihood that this would make you think '
+    #                       'more carefully before you speak?')
+    # q12_GASP = make_field('You take office supplies home for personal use and are caught by your boss. What is the '
+    #                       'likelihood that this would lead you to quit your job?')
+    # q13_GASP = make_field('You make a mistake at work and find out a coworker is blamed for the error. Later, '
+    #                       'your coworker confronts you about your mistake. What is the likelihood that you would feel'
+    #                       ' like a coward?')
+    # q14_GASP = make_field('At a coworker’s housewarming party, you spill red wine on their new creamcolored carpet. '
+    #                       'You cover the stain with a chair so that nobody notices your mess. What is the likelihood '
+    #                       'that you would feel that the way you acted was pathetic?')
+    # q15_GASP = make_field('While discussing a heated subject with friends, you suddenly realize you are shouting '
+    #                       'though nobody seems to notice. What is the likelihood that you would try to act more '
+    #                       'considerately toward your friends?')
+    # q16_GASP = make_field('You lie to people but they never find out about it. What is the likelihood that you would '
+    #                       'feel terrible about the lies you told?')
+
+    scenario1_choice1_KW = make_field('Report an Income of  £0.60')
+    scenario1_choice2_KW = make_field('Report an Income of  £1.50')
+    scenario1_choice3_KW = make_field('Report an Income of  £2.50')
+    scenario1_choice4_KW = make_field('Report an Income of  £3')
+
+    scenario2_choice1_KW = make_field('Report an Income of  £0.60')
+    scenario2_choice2_KW = make_field('Report an Income of  £1.50')
+    scenario2_choice3_KW = make_field('Report an Income of  £2.50')
+    scenario2_choice4_KW = make_field('Report an Income of  £3')
+
+    scenario3_choice1_KW = make_field('Report an Income of  £0.60')
+    scenario3_choice2_KW = make_field('Report an Income of  £1.50')
+    scenario3_choice3_KW = make_field('Report an Income of  £2.50')
+    scenario3_choice4_KW = make_field('Report an Income of  £3')
+
+    scenario4_choice1_KW = make_field('Report an Income of  £0.60')
+    scenario4_choice2_KW = make_field('Report an Income of  £1.50')
+    scenario4_choice3_KW = make_field('Report an Income of  £2.50')
+    scenario4_choice4_KW = make_field('Report an Income of  £3')
 
 
 # FUNCTIONS
@@ -139,11 +160,26 @@ class Demographics(Page):
     form_fields = ['age', 'gender', 'education', 'student', 'experiments', 'reasoning', 'religion']
 
 
-class GASP(Page):
+class Inst_KrupkaWeber(Page):
+    pass
+
+
+class KrupkaWeber(Page):
     form_model = 'player'
-    form_fields = ['q1_GASP', 'q2_GASP', 'q3_GASP', 'q4_GASP', 'q5_GASP',
-                   'q6_GASP', 'q7_GASP', 'q8_GASP', 'q9_GASP', 'q10_GASP',
-                   'q11_GASP', 'q12_GASP', 'q13_GASP', 'q14_GASP', 'q15_GASP', 'q16_GASP']
+    form_fields = ['scenario1_choice1_KW', 'scenario1_choice2_KW', 'scenario1_choice3_KW', 'scenario1_choice4_KW',
+                   'scenario2_choice1_KW', 'scenario2_choice2_KW', 'scenario2_choice3_KW', 'scenario2_choice4_KW',
+                   'scenario3_choice1_KW', 'scenario3_choice2_KW', 'scenario3_choice3_KW', 'scenario3_choice4_KW',
+                   'scenario4_choice1_KW', 'scenario4_choice2_KW', 'scenario4_choice3_KW', 'scenario4_choice4_KW']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(CHOICE=player.participant.CHOICE)
+
+# class GASP(Page):
+#     form_model = 'player'
+#     form_fields = ['q1_GASP', 'q2_GASP', 'q3_GASP', 'q4_GASP', 'q5_GASP',
+#                    'q6_GASP', 'q7_GASP', 'q8_GASP', 'q9_GASP', 'q10_GASP',
+#                    'q11_GASP', 'q12_GASP', 'q13_GASP', 'q14_GASP', 'q15_GASP', 'q16_GASP']
 
 
-page_sequence = [Demographics]
+page_sequence = [Demographics, Inst_KrupkaWeber, KrupkaWeber]

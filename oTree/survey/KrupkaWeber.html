@@ -1,0 +1,459 @@
+{{ block title }}{{ endblock }}
+{{ block content }}
+
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+
+
+
+<style>
+tr:nth-child(even) {background-color: #f9f9f9; width: 10%}
+th {
+    text-align:center;
+    font-size:18px;
+}
+td {
+    text-align:left;
+    font-weight: normal;
+    font-size:18px;
+}
+.table {
+  margin-left: auto;
+  margin-right: auto;
+}
+h3 {
+ color: #0d6efd;
+}
+</style>
+
+{{ endblock }}
+
+    {{ if CHOICE }}
+
+    <h3>Situation 1</h3>
+    <p>
+        Participant B has earned <strong> £3 </strong> in the encryption task.
+        Then, Participant B learns that there is a <strong> 90% </strong> chance
+        of being matched with a Participant A who, when presented with the
+        opportunity of taking {{Constants.money_to_take}} from the
+        contributions to Keep Britain Tidy,
+        <strong>has taken the {{Constants.money_to_take}}</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice1_KW.label }}</th>
+    {{ for choice in form.scenario1_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice2_KW.label }}</th>
+    {{ for choice in form.scenario1_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice3_KW.label }}</th>
+    {{ for choice in form.scenario1_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice4_KW.label }}</th>
+    {{ for choice in form.scenario1_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+<br>
+   <h3>Situation 2</h3>
+    <p>
+        Participant B has earned <strong> £3 </strong> in the encryption task.
+        Then, Participant B learns that there is a <strong> 20% </strong> chance
+        of being matched with a participant A who, when presented with the
+        opportunity of taking {{Constants.money_to_take}} from the
+        contributions to Keep Britain Tidy,
+        <strong>has taken the {{Constants.money_to_take}}</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice1_KW.label }}</th>
+    {{ for choice in form.scenario2_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice2_KW.label }}</th>
+    {{ for choice in form.scenario2_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice3_KW.label }}</th>
+    {{ for choice in form.scenario2_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice4_KW.label }}</th>
+    {{ for choice in form.scenario2_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+
+<br>
+   <h3>Situation 3</h3>
+    <p>
+        Participant B has earned <strong>£3</strong> in the encryption task.
+        Then, participant B leans that Participant A in their group has been
+        included in a lottery with a prize of {{Constants.money_to_take}}
+        from the contributions to Keep Britain.
+        The <strong>chances of winning were 90%</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice1_KW.label }}</th>
+    {{ for choice in form.scenario3_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice2_KW.label }}</th>
+    {{ for choice in form.scenario3_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice3_KW.label }}</th>
+    {{ for choice in form.scenario3_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice4_KW.label }}</th>
+    {{ for choice in form.scenario3_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+
+<br>
+   <h3>Situation 4</h3>
+    <p>
+        Participant B has earned <strong>£3</strong> in the encryption task.
+        Then, participant B leans that Participant A in their group has been
+        included in a lottery with a prize of {{Constants.money_to_take}}
+        from the contributions to Keep Britain.
+        The <strong>chances of winning were 20%</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice1_KW.label }}</th>
+    {{ for choice in form.scenario4_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice2_KW.label }}</th>
+    {{ for choice in form.scenario4_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice3_KW.label }}</th>
+    {{ for choice in form.scenario4_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice4_KW.label }}</th>
+    {{ for choice in form.scenario4_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+
+{{else}} <!-- Here the for the variables regardless of the order, scenario 1 and 2 are CHOICE and other are RANDOM -->
+
+    <h3>Situation 1</h3>
+    <p>
+        Participant B has earned <strong>£3</strong> in the encryption task.
+        Then, participant B leans that Participant A in their group has been
+        included in a lottery with a prize of {{Constants.money_to_take}}
+        from the contributions to Keep Britain.
+        The <strong>chances of winning were 90%</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice1_KW.label }}</th>
+    {{ for choice in form.scenario3_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice2_KW.label }}</th>
+    {{ for choice in form.scenario3_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice3_KW.label }}</th>
+    {{ for choice in form.scenario3_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario3_choice4_KW.label }}</th>
+    {{ for choice in form.scenario3_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+
+<br>
+   <h3>Situation 2</h3>
+    <p>
+        Participant B has earned <strong>£3</strong> in the encryption task.
+        Then, participant B leans that Participant A in their group has been
+        included in a lottery with a prize of {{Constants.money_to_take}}
+        from the contributions to Keep Britain.
+        The <strong>chances of winning were 20%</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice1_KW.label }}</th>
+    {{ for choice in form.scenario4_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice2_KW.label }}</th>
+    {{ for choice in form.scenario4_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice3_KW.label }}</th>
+    {{ for choice in form.scenario4_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario4_choice4_KW.label }}</th>
+    {{ for choice in form.scenario4_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+
+
+
+    <h3>Situation 3</h3>
+    <p>
+        Participant B has earned <strong> £3 </strong> in the encryption task.
+        Then, Participant B learns that there is a <strong> 90% </strong> chance
+        of being matched with a participant A who, when presented with the
+        opportunity of taking {{Constants.money_to_take}} from the
+        contributions to Keep Britain Tidy,
+        <strong>has taken the {{Constants.money_to_take}}</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice1_KW.label }}</th>
+    {{ for choice in form.scenario1_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice2_KW.label }}</th>
+    {{ for choice in form.scenario1_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice3_KW.label }}</th>
+    {{ for choice in form.scenario1_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario1_choice4_KW.label }}</th>
+    {{ for choice in form.scenario1_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+<br>
+   <h3>Situation 4</h3>
+    <p>
+        Participant B has earned <strong> £3 </strong> in the encryption task.
+        Then, Participant B learns that there is a <strong> 20% </strong> chance
+        of being matched with a participant A who, when presented with the
+        opportunity of taking {{Constants.money_to_take}} from the
+        contributions to Keep Britain Tidy,
+        <strong>has taken the {{Constants.money_to_take}}</strong>.
+    </p>
+
+<table class="table" style="width: auto" >
+
+<tr>
+<th> <br><div><br></div> <h5>Participant B's decision</h5> </th>
+<th> <br><div>Very<br>Socially <br> Inappropriate</div> </th>
+<th> <br><div>Somewhat <br>Socially <br> Inappropriate </div></th>
+<th> <br><div>Somewhat <br>Socially <br> Appropriate </div></th>
+<th> <br><div>Very<br>Socially <br> Appropriate</div></th>
+<th></th>
+
+</tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice1_KW.label }}</th>
+    {{ for choice in form.scenario2_choice1_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice2_KW.label }}</th>
+    {{ for choice in form.scenario2_choice2_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice3_KW.label }}</th>
+    {{ for choice in form.scenario2_choice3_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+    <tr>
+    <th>{{ form.scenario2_choice4_KW.label }}</th>
+    {{ for choice in form.scenario2_choice4_KW }}
+        <th>{{ choice }}</th>
+    {{ endfor }}
+    </tr>
+
+        </table>
+
+{{endif}}
+
+    {{ next_button }}
+
+{{ endblock }}

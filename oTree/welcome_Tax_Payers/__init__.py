@@ -3,16 +3,18 @@ from otree.api import *
 c = Currency
 
 doc = """
-Welcome page Tax Evasion
+Welcome page Tax Evasion CHOICE
 """
 
 
 class Constants(BaseConstants):
-    name_in_url = 'exp_welc_PO'
+    name_in_url = 'exp_welc_PO_Choice'
     players_per_group = None
     num_rounds = 1
 
     completion_fee = cu(1.1)
+    payoff_trial = cu(0.6)
+
 
 
 class Subsession(BaseSubsession):
@@ -22,7 +24,7 @@ class Subsession(BaseSubsession):
 def creating_session(subsession: Subsession):
     import csv
 
-    f = open(__name__ + '/pilot1_decisions.csv', encoding='utf-8-sig')
+    f = open(__name__ + '/PO_decisions_choice.csv', encoding='utf-8-sig')
 
     rows = list(csv.DictReader(f))
     players = subsession.get_players()
@@ -33,6 +35,7 @@ def creating_session(subsession: Subsession):
         player.embezzle = bool(int(row['embezzle']))
         player.corruption_level = bool(int(row['corruption_level']))
         player.cluster_number = int(row['cluster_number'])
+        player.frompilot = bool(int(row['frompilot']))
 
 
 class Group(BaseGroup):
@@ -44,6 +47,8 @@ class Player(BasePlayer):
     cluster_number = models.IntegerField()
     corruption_level = models.BooleanField()
     participant_label_exp1 = models.StringField()
+    frompilot = models.BooleanField()
+
 
 
 # PAGES
@@ -55,6 +60,7 @@ class Inst1_Welcome(Page):
         player.participant.cluster_number = player.cluster_number
         player.participant.corruption_level = player.corruption_level
         player.participant.participant_label_exp1 = player.participant_label_exp1
+        player.participant.frompilot = player.frompilot
 
 
 page_sequence = [Inst1_Welcome]

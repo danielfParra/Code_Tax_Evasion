@@ -1,0 +1,344 @@
+{{ extends "otree/Page.html" }}
+{{ load otree }}
+
+{{ block global_styles  }}
+<style type="text/css">
+
+._otree-content{
+    width:90vw;
+    }
+
+.page-header{
+    margin: 4
+}
+
+.otree-body{
+    margin-left:5vw;
+}
+
+.otree-form-errors{
+    display: none;
+    text-align: center;
+
+}
+
+.task-container{
+    display: grid;
+    width: 50%;
+    margin: auto;
+    border: 1px solid #6c757d;
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
+
+}
+
+.task-subcontainer{
+    display: grid;
+    width: auto;
+    margin: auto;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto repeat({{Constants.letters_per_word}}, auto);
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 1vw;
+    grid-row-gap: 0.5vw;
+}
+
+.legend{
+    display: grid;
+    grid-template-columns: repeat(26, 1em);
+    grid-template-rows: 1;
+    grid-column-gap: 0vw;
+}
+
+.legend-letter{
+    font-size: 1.5vw;
+    background-color: #cccccc;
+}
+
+.legend-code{
+    font-size: 1.5vw;
+}
+
+.task-letter{
+    font-size: 2vw;
+    color: white;
+    text-align: center;
+    background-color: #080F5B;
+    width: 100%;
+    height: 100%;
+      display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.task-code{
+    font-size: 2vw;
+    width: 3em;
+}
+
+.test{
+  display: block;
+}
+
+table, td, th {
+  border: 1px solid #080F5B;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  font-size: 2vw;
+  color:#080F5B;
+  height: 2ex;
+  text-align: center;
+  background-color: #F4E4C1;
+}
+
+td {
+  font-size: 1.5vw;
+  height: 3.5ex;
+  text-align: center;
+}
+
+.button-container{
+    display: grid;
+    grid-template-columns: 6em auto;
+    grid-template-rows: 1;
+    grid-column-gap: 1vw
+}
+.otree-timer {
+    font-size: large;
+    text-align: center;
+    background-color: whitesmoke;
+    border: solid #6c757d;
+    display: block;
+    margin-left: auto;
+    width: 30%;
+    align-content: center;
+    position: relative;
+}
+
+</style>
+{{ endblock }}
+
+
+
+{{ block title }}
+    Encoding Task
+{{ endblock }}
+
+
+{{ block content }}
+
+<input type="hidden" name="performance" id="performance"> {{ formfield_errors 'performance' }}
+<input type="hidden" name="mistakes" id="mistakes">{{ formfield_errors 'mistakes' }}
+
+<div class="test" id="hide_task">
+
+<!-- <form id="test_frm"> -->
+<div class="task-container">
+<div class="task-subcontainer">
+    <div style="font-size: 1.8vw">Word: &nbsp;&nbsp;&nbsp;&nbsp;   </div>
+        {% for l in task_list%}
+                <div class="task-letter" id="task_letter_{{l}}"></div>
+        {% endfor %}
+    <div style="font-size: 1.8vw">Code:   &nbsp;&nbsp;&nbsp;&nbsp;  </div>
+        {% for l in task_list%}
+                <input class="task-code" id="task_code_{{l}}" type="number">
+        {% endfor %}
+</div>
+</div>
+
+<br><br>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <input type="button" onclick="myFunction()" class="btn btn-dark btn-lg"  value="Submit">
+    </div>
+<div class="alert alert-danger collapse" role="alert" id="error-form"></div>
+</div>
+
+<br><br>
+
+<table>
+<tr>
+ {% for l in legend_list %}
+<th id="llid_{{l}}"></td>
+{% endfor%}
+</tr>
+<tr>
+    {% for l in legend_list %}
+<td id="lcid_{{l}}"></td>
+{% endfor%}
+</tr>
+</table>
+
+<br><br>
+ <div class="container mb-3 h-100 d-flex justify-content-center" style="max-width: 30rem;">
+    <div class="card bg-light mb-3 h-100 d-flex justify-content-center" style="max-width: 30rem;">
+    <div class="card-body h-100 d-flex justify-content-center" >
+    <h5 class="card-title" align="center">Total Encoded Words
+        <span class="badge rounded-pill bg-success"><h5 class="card-text" id="encrypted"></h5></span> </h5>
+
+  </div> </div>
+</div>
+
+</div>
+
+{{ endblock }}
+
+
+{{ block global_scripts  }}
+
+<script>
+
+ $(window).bind('beforeunload',function() {
+    return "'Are you sure you want to leave the page? All data will be lost!";
+});
+
+$('.otree-timer__time-left').on('finish.countdown', function(){
+    $(window).unbind('beforeunload');
+});
+
+
+  document.getElementById("performance").value = 0;
+  document.getElementById("mistakes").value = 0;
+
+  letters_per_word = {{Constants.letters_per_word}};
+  alphabet = genCharArray('A', 'Z');
+  legend_letters = alphabet;
+  word_letters = alphabet;
+  dict = genNewDict();
+  word = genNewWord();
+
+  dict=genNewDict();
+
+  shuffle(legend_letters)
+  for (var i = 0; i <= 25; i++) {
+    document.getElementById("llid_"+i).innerText=legend_letters[i];
+    document.getElementById("lcid_"+i).innerText=dict[legend_letters[i]];
+  }
+
+   for (var i=0; i< letters_per_word; i++) {
+    document.getElementById("task_letter_"+i).innerText=word[i];
+  }
+
+function myFunction() {
+    errors=checkSolution();
+
+  if (errors == 0) {
+      var temp = Number(document.getElementById("performance").value) + 1
+      document.getElementById("performance").value = temp;
+      document.getElementById("error-form").style.display = "none";
+      document.getElementById("encrypted").innerHTML = temp
+
+      dict=genNewDict();
+      shuffle(legend_letters)
+      for (var i = 0; i <= 25; i++) {
+        document.getElementById("llid_"+i).innerText=legend_letters[i];
+        document.getElementById("lcid_"+i).innerText=dict[legend_letters[i]];
+      }
+
+      word = genNewWord();
+      for (var i=0; i< letters_per_word; i++) {
+        document.getElementById("task_letter_"+i).innerText=word[i];
+        document.getElementById("task_code_"+i).value='';
+      }
+
+  }
+  else if (errors > 0) {
+      var temp = Number(document.getElementById("mistakes").value) + 1
+      document.getElementById("mistakes").value = temp;
+      document.getElementById("error-form").innerText = "There is(are) "+errors+" mistake(s) in your answer. Check it out!";
+      document.getElementById("error-form").style.display = "block";
+  }
+}
+
+function checkSolution() {
+    var answers = [];
+    var errors = 0;
+    for (var i = 0; i < letters_per_word; i++) {
+        answers[i] = Number(document.getElementById("task_code_"+i).value);
+        if (dict[word[i]] != answers[i]) {errors += 1}
+
+    }
+    return errors
+}
+
+function genNewWord() {
+    shuffle(word_letters)
+    word = [];
+      for (var i = 0; i < letters_per_word; i++) {
+           word[i] = word_letters[i];
+       }
+    return word
+}
+
+function genCharArray(charA, charZ) {
+    var a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
+    for (; i <= j; ++i) {
+        a.push(String.fromCharCode(i));
+    }
+    return a;
+}
+
+function shuffle(a) {
+    var j, x, i;
+    var b=a;
+    for (i = b.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = b[i];
+        b[i] = b[j];
+        b[j] = x;
+    }
+    return a;
+}
+
+function randomDataSet(dataSetSize, minValue, maxValue) {
+  return new Array(dataSetSize).fill(0).map(function(n) {
+    return Math.floor(Math.random() * (maxValue - minValue) + minValue);
+  });
+}
+
+function genNewDict() {
+    dict = {}
+    dict["A"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["B"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["C"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["D"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["E"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["F"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["G"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["H"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["I"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["J"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["K"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["L"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["M"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["N"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["O"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["P"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["Q"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["R"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["S"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["T"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["U"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["V"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["W"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["X"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["Y"] = Math.floor(Math.random() * (999 - 100) + 100);
+    dict["Z"] = Math.floor(Math.random() * (999 - 100) + 100);
+    shuffle(dict)
+    return dict
+
+}
+</script>
+
+{{ endblock }}
+
+

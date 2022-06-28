@@ -4,6 +4,8 @@ c = Currency
 
 doc = """
 Choice Taxpayers - Tax Evasion Game
+
+REMEMBER TO CHECK MANUALLY THE WHEEL SEGMENTS
 """
 
 
@@ -56,6 +58,7 @@ class Player(BasePlayer):
     reportedIncome = models.FloatField()
     embezzle = models.BooleanField()
     corruption_level = models.BooleanField()
+    CHOICE = models.BooleanField()
 
     q1TP = models.IntegerField(
         choices=[
@@ -77,8 +80,8 @@ class Player(BasePlayer):
 
     q3TP = models.IntegerField(
         choices=[
-            [1, 'Your decision affects Players A\'s earnings'],
-            [2, 'You performed a encoding task in Part 1.'],
+            [1, 'Your decision affects Player A\'s earnings'],
+            [2, 'You performed an encoding task in Part 1.'],
             [3, 'The {} that Player A can take correspond to the collected taxes coming '
                 'from your group\'s earnings in the practice round in Part 1.'.format(Constants.money_to_take)],
         ],
@@ -96,15 +99,14 @@ def q1TP_error_message(player, value):
 def q2TP_error_message(player, value):
     print('value is', value)
     if value != 3:
-        return 'Recall: You are the only one knowing your actual income. That is the reason why you need to report it ' \
-               'to be taxed. '
+        return 'Recall: You are the only one knowing your actual income. This information will never be revealed.'
 
 
 def q3TP_error_message(player, value):
     print('value is', value)
     if not value == 1:
-        return 'Recall: You do not affect Players A’s earnings because the money they can take  ' \
-               'comes from the earnings in the practice round and not from your reported income. '
+        return 'Recall: You cannot affect Player A’s earnings because the money they can take comes from ' \
+                'the earnings in the practice round and that is a fixed amount common to all and that all Players B earn.'
 
 
 # PAGES
@@ -114,6 +116,9 @@ class Inst_ChoiceTP(Page):
     def vars_for_template(player: Player):
         return dict(
             red_high=Constants.corruptPO_high,
+            red_low=Constants.corruptPO_low,
+            embezzle=player.participant.embezzle,
+            corruption_level=player.participant.corruption_level
         )
 
 
@@ -136,6 +141,7 @@ class Decision_TP(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
+        player.CHOICE = 1
         income = player.participant.earnings
         reportedIncome = player.reportedIncome
         player.payoff = income - (reportedIncome * (Constants.tax_rate / 100))
@@ -154,7 +160,9 @@ class Decision_TP(Page):
             payoff_trial=Constants.payoff_trial,
             corruption_level=player.corruption_level,
             max_report=player.participant.earnings*100 / Constants.tax_rate,
-            red_high=Constants.corruptPO_high
+            red_high=Constants.corruptPO_high,
+            red_low=Constants.corruptPO_low,
+            embezzle=player.participant.embezzle
         )
 
 class Takeweel(Page):
@@ -162,8 +170,11 @@ class Takeweel(Page):
     def vars_for_template(player: Player):
         decision_PO = player.participant.embezzle
         return dict(
-            decision_PO=decision_PO
-        )
+            decision_PO=decision_PO,
+            corruption_level=player.corruption_level,
+            red_high=Constants.corruptPO_high,
+            red_low=Constants.corruptPO_low
+         )
 
 
 class Feedback_TP(Page):
@@ -173,6 +184,7 @@ class Feedback_TP(Page):
             player.payoff = player.payoff - Constants.payoff_trial
         else:
             player.payoff = cu(0)
+        player.participant.CHOICE = player.CHOICE
 
     @staticmethod
     def vars_for_template(player: Player):

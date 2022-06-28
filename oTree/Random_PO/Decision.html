@@ -1,0 +1,48 @@
+{{ block title }}
+    Your decision
+{{ endblock }}
+
+<style>
+    h5{
+        text-align: center;
+    }
+</style>
+
+
+ <style>
+      p {
+        font-size:20px;
+      }
+      .payoff {
+        color: #0b5ed7;
+        font-weight:bold;
+      }
+      p.blocktext{
+    text-align: center;
+      }
+
+      hr {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border:2px solid;
+        border-radius: 5px;
+}
+    }
+ </style>
+
+{{ block content }}
+
+<div class="card w-90">
+  <div class="card-body">
+    <h5 class="card-title">Do you want to take the {{ Constants.money_to_take }}?</h5>
+<div class="d-grid gap-2 d-md-block col-2 mx-auto">
+<button name="embezzle" class="btn btn-info btn-lg" value="True">Yes</button>
+<button name="embezzle" class="btn btn-info btn-lg" value="False">No</button>
+</div>
+  </div>
+</div>
+
+
+
+{{ endblock }}

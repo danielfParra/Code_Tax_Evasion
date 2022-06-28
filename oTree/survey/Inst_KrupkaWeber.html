@@ -1,0 +1,100 @@
+{{ block title }}
+Survey Part 2
+{{ endblock }}
+{{ block content }}
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link href="{{ static 'myStyleButton.css' }}" rel="stylesheet"/>
+
+{{ endblock }}
+
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+
+
+    <p>
+    You will read descriptions of a series of situations on the following screens.
+    These descriptions correspond to situations in which a Participant B in this
+    study must make an income-report decision. The description of each situation
+    will include several possible choices available to Participant B.
+    </p>
+
+    <p>
+    <input id="info_button1" type="button" value="&#xf178" onclick="button_click(info_button1, paragraph1);" />
+    </p>
+
+    <div id="paragraph1" class="hidden-paragraph">
+
+    <p>
+        After you read the description of the situation, you will be asked to evaluate
+        the different possible income-report choices available to Participant B.
+        You will decide, for each of the possible income-report options, whether
+        taking that choice would be "socially appropriate" and "consistent with
+        moral or proper social behavior" or "socially inappropriate" and "inconsistent
+        with moral or proper social behavior."
+    </p>
+
+    <p>
+        By socially appropriate, we mean behavior that most people agree is the "correct" or "ethical"
+        thing to do. Another way to think about what we mean is that if Participant B were to
+        select a socially inappropriate choice, someone else might be angry at Participant B.
+        We would like you to answer based on your opinions of what constitutes socially
+        appropriate or socially inappropriate behavior in each of your responses.
+    </p>
+    <p>    <strong>You can earn additional money in this part of the survey.</strong>
+    </p>
+        <p>
+    <input id="info_button2" type="button" value="&#xf178" onclick="buttonAppear(); button_click(info_button2, paragraph2);" />
+    </p>
+
+
+
+        </div>
+
+        <div id="paragraph2" class="hidden-paragraph">
+
+    <h4> How your additional earnings in this survey are determined? </h4>
+<br>
+     <p>
+         You will assess the possible income-report choices of participant B in four different
+         situations. At the end of this study, we will randomly select one of the four situations.
+         For this situation, we will also randomly choose one of the choices that Participant B
+         could make.
+     </p>
+            <p>
+         We will check which response was selected by the most participants in this study for the
+         selected choice. If you give the same response as the most frequently provided by the
+         other participants, you will receive £0.25. This amount will be paid to you in the next
+         few days once we collect all participants' responses to calculate the prize.
+     </p>
+         <p>
+         We will send a message to all participants indicating what the most selected response
+             for this situation was, along with your payment, if any.
+         </p>
+
+        </div></div></div>
+
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
+
+
+
+{{ endblock }}
+
+{% block scripts %}
+
+<!-- Load the custom javascript functions -->
+
+
+<script src="{% static 'myJs.js' %}"></script>
+<script src="https://kit.fontawesome.com/46026ecfac.js" crossOrigin="anonymous"></script>
+
+{% endblock %}
+
+
+

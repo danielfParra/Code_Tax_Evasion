@@ -1,0 +1,48 @@
+{{ block title }}
+
+{{ endblock }}
+
+<style>
+    h5{
+        text-align: center;
+    }
+</style>
+
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+
+{{ block content }}
+
+{{if decision_PO}}
+<div class="card border-dark mb-3">
+  <div class="card-body">
+    <p class="card-text"> <h5>Your final earnings are the following</h5></p>
+
+        <p class="blocktext"> Your earnings in Part 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
+        <p class="blocktext"> Your paid taxes = <span class="payoff">&#163;{{ paid_taxes }}</span> </p>
+        <p class="blocktext"> You were matched with a Public Official who has <i>won the {{Constants.money_to_take}}</i></p>
+        <hr>
+      <p class="blocktext"> <strong>Final earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
+
+</div></div>
+      <br>
+
+{{else}}
+<div class="card border-dark mb-3">
+  <div class="card-body">
+    <p class="card-text"> <h5>Your final earnings are the following</h5></p>
+
+        <p class="blocktext"> Your earnings in Part 1 = <span class="payoff">{{ payoff_task1 }}</span> </p>
+        <p class="blocktext"> Your paid taxes = <span class="payoff">{{ paid_taxes }}</span> </p>
+        <p class="blocktext"> You were matched with a Public Official who has <i> not won the {{Constants.money_to_take}}</i></p>
+        <hr>
+      <p class="blocktext"> <strong>Final earnings =</strong> <span class="payoff">{{ payoff }}</span> </p>
+
+</div></div>
+      <br>
+
+
+{{ endif }}
+
+{{ next_button }}
+
+{{ endblock }}

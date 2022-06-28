@@ -2,8 +2,8 @@
 {{ load otree }}
 
   {{ block title }}
-Thank you for participation in this study!
-  {{ endblock }}
+Thank you for participating in this study!
+{{ endblock }}
 
 
 {{ block styles }}
@@ -21,17 +21,23 @@ Thank you for participation in this study!
   </div>
   <div class="card-body"
        title="In case something went wrong, please make a screenshot and contact us via Prolific.">
-
-
     <p>
-      For your participation in this study you will receive
+      For your participation in this study, you will receive
       {{ Prolific_fixed_payoff }} on your Prolific account
       <b>{{ participant.label }}</b> which include the completion fee of {{ Constants.completion_fee }}
-      and the {{ trial_payoff }} from the trial
-      part of the encryption task. Based on your decisions you will
+      and the {{ trial_payoff }} from the practice round of the encryption task.
+      </p>
+    <p>
+      Based on your decisions you will
       receive the additional {{ payoff }} in a form of a bonus after
-      the end of the study. The latter might take some time, so we ask
-      you to be patient.
+      the end of the study. The bonus payment might take a few more hours to reach you,
+      so we ask you to be patient.
+    </p>
+    <p>
+      Additionally you may earn a bonus payment from part 2 of the survey.
+      To determine your bonus payment, we need to collect all participants' responses
+      to calculate the prize. We will send a message to all participants indicating
+      what the most selected response for this situation was, along with the payment, if any.
     </p>
 
 <div class="card border-secondary mb-3">
@@ -42,8 +48,7 @@ Thank you for participation in this study!
     <p>
       For further questions please contact us under
       <a href="mailto:prolificstudy@wzb.eu?subject=WZB%20Prolific%20study">
-        prolificstudy@wzb.eu
-      </a>
+        prolificstudy@wzb.eu</a>.
     </p>
   </div>
 </div>

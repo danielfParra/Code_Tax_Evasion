@@ -1,0 +1,131 @@
+{{ block title }}Instructions Part 2{{ endblock }}
+{{ block content }}
+
+{{ block styles }}
+<!-- Load the custom css styles -->
+<link href="{{ static 'myStyle.css' }}" rel="stylesheet"/>
+<link href="{{ static 'myStyleButton.css' }}" rel="stylesheet"/>
+
+{{ endblock }}
+
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+    <p>
+        You have been assigned to the role of <strong>Player A</strong>
+        and you will be matched with a
+        group of <strong>3 Players B</strong>.
+    </p>
+
+    <p>
+    <input id="info_button1" type="button" value="&#xf178" onclick="button_click(info_button1, paragraph1);" />
+    </p>
+
+    <div id="paragraph1" class="hidden-paragraph">
+
+    <p>
+        <strong>Players B</strong> will participate in a game in which they
+        will perform the same encoding task you have done in Part 1.
+        They, as well as you, will be paid for doing the task.
+    </p>
+
+        <p>
+    <input id="info_button2" type="button" value="&#xf178" onclick="button_click(info_button2, paragraph2);" />
+    </p>
+
+        </div>
+
+        <div id="paragraph2" class="hidden-paragraph">
+
+     <p>
+        <strong>Players B</strong> will be asked to pay a {{Constants.tax_rate}}% tax on
+         their self-reported earnings.
+     </p>
+
+    <p>
+         Taxes collected will be <strong>doubled</strong> and given to the organisation
+         <strong>Keep Britain Tidy</strong> at the end of this study.
+         The money will be used to support its activities to reduce litter,
+         improve local places, and prevent waste.
+     </p>
+
+       <p>
+    <input id="info_button3" type="button" value="&#xf178" onclick="button_click(info_button3, paragraph3);" />
+    </p>
+        </div>
+
+            <div id="paragraph3" class="hidden-paragraph">
+
+<p>
+    As <strong>Player A</strong>, you will participate in a lottery for a prize of
+    <strong>{{Constants.money_to_take}} from the collected taxes</strong>.
+    If you win the prize, the money will be deducted before being doubled and transferred to
+    <strong>Keep Britain Tidy</strong>.
+</p>
+     <p>
+         Given that each <strong>Player B</strong> will participate in the practice round for sure,
+         the collected taxes will be at least {{Constants.money_to_take}} regardless of what each
+         Player B will decide to report.
+     </p>
+
+     <p>
+         <i>The outcome of the lottery,  what ever it is,
+             <strong>will not affect Player B's earnings</strong>.</i>
+     </p>
+
+               <p>
+    <input id="info_button5" type="button" value="&#xf178" onclick="buttonAppear(); button_click(info_button5, paragraph5);" />
+    </p>
+    </div>
+
+    <div id="paragraph5" class="hidden-paragraph">
+
+        <div class="card">
+  <div class="card-header">
+   <h4> What will your final earnings be?</h4>
+  </div>
+  <div class="card-body">
+      <h5>If you <u><em>win the prize</em></u> of {{Constants.money_to_take}}</h5>
+
+      <ul>
+         <li> Your earnings = Your earnings in Part 1 + {{Constants.money_to_take}}</li>
+      </ul>
+
+      <h5>If you <u><em> do not win the prize</em></u> of {{Constants.money_to_take}}</h5>
+
+      <ul>
+         <li> Your earnings = Your earnings in Part 1 </li>
+      </ul>
+
+<br>
+
+  </div>
+
+</div>
+        <br>
+        <p>
+        <i> Before starting, we’d like you to answer the questions on the next page to check your understanding.</i>
+</p>
+</div>
+    </div></div>
+
+<div id="next" style="display: none">
+        {{ next_button }}
+</div>
+
+
+{{ endblock }}
+
+{% block scripts %}
+
+<!-- Load the custom javascript functions -->
+
+
+<script src="{% static 'myJs.js' %}"></script>
+<script src="https://kit.fontawesome.com/46026ecfac.js" crossOrigin="anonymous"></script>
+
+{% endblock %}
+
+
+
